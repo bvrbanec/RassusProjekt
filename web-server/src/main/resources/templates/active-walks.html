@@ -1,0 +1,41 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<body>
+	<h1>Active Walks</h1>
+	<div th:if="not ${activeWalks}" class="error">
+		No active found.
+		<div style="height: 2cm">&nbsp;</div>
+	</div>
+
+	<div th:if="${activeWalks}">
+		<p>
+			All active walk offers:
+		</p>
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Dog ID</th>
+					<th>Owner ID</th>
+					<th>Distance</th>
+					<th>Duration</th>
+					<th>Price</th>
+					
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="walk : ${activeWalks}">
+					<td th:text="${walk.dogId}">0</td>
+					<td th:text="${walk.ownerId}">Owner</td>
+					<td th:text="${walk.distance}">0</td>
+					<td th:text="${walk.duration}">0</td>
+					<td th:text="${walk.price}">0</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
