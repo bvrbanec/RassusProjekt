@@ -3,9 +3,7 @@ package hr.unizg.fer.rassus.grupa5;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import org.joda.time.DateTime;
-
+import java.time.LocalDateTime;
 @Entity
 public class Walk {
 
@@ -15,7 +13,7 @@ public class Walk {
 	private Long dogId;
 	private Long walkerId;
 	private Long ownerId;
-	private DateTime date;
+	private LocalDateTime date;
 	private Integer duration;
 	private Integer distance;
 	private Integer price;
@@ -52,11 +50,11 @@ public class Walk {
 		this.ownerId = ownerId;
 	}
 
-	public DateTime getDate() {
+	public LocalDateTime getDate() {
 		return date;
 	}
 
-	public void setDate(DateTime date) {
+	public void setDate(LocalDateTime date) {
 		this.date = date;
 	}
 

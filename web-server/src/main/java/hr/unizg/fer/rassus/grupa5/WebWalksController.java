@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Controller
 @RequestMapping("/walks/*")
@@ -22,10 +24,6 @@ public class WebWalksController {
 		this.walksService = walksService;
 	}
 
-	/*
-	 * @InitBinder public void initBinder(WebDataBinder binder) {
-	 * binder.setAllowedFields("accountNumber", "searchText"); }
-	 */
 	@RequestMapping("/dog/{dogId}")
 	public String byDog(Model model, @PathVariable("dogId") Long dogId) {
 		List<Walk> walks = new ArrayList<Walk>();
@@ -50,10 +48,12 @@ public class WebWalksController {
 		return "owner-walks";
 	}
 
-	@RequestMapping("/active")
+	@RequestMapping(value = "/active", method = RequestMethod.GET)
 	public String activeWalks(Model model) {
 		List<Walk> walks = new ArrayList<Walk>();
 		walks = walksService.findByWalkerIdIsNull();
+		System.out.println("setnje");
+		System.out.println(walks.get(0).getPrice());
 		model.addAttribute("activeWalks", walks);
 		return "active-walks";
 	}

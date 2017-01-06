@@ -24,6 +24,7 @@ public class WalksController {
 	public List<Walk> byDog(@PathVariable("dogId") Long dogId) {
 		return walkRepository.findByDogId(dogId);
 	}
+	
 
 	@RequestMapping("/walker/{walkerId}")
 	public List<Walk> byWalker(@PathVariable("walkerId") Long walkerId) {

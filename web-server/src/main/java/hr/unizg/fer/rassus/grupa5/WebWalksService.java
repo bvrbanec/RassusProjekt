@@ -1,6 +1,8 @@
 package hr.unizg.fer.rassus.grupa5;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,11 +52,17 @@ public class WebWalksService {
 
 	List<Walk> findByWalkerIdIsNull() {
 		Walk[] walks = null;
+		List<Walk> listWalks = new ArrayList<Walk>();
 		walks = restTemplate.getForObject(walksServiceUrl + "/active", Walk[].class);
-		if (walks == null || walks.length == 0)
-			return null;
-		else
-			return Arrays.asList(walks);
+		if (walks == null || walks.length == 0){
+			System.out.println("nema dohvacenih setnji");
+			Walk emptyWalk = new Walk();
+			listWalks.add(emptyWalk);
+		}
+		else{
+			listWalks.addAll(Arrays.asList(walks));
+		}
+		return listWalks;
 	}
 
 	public Walk offerWalk(Walk walk) {

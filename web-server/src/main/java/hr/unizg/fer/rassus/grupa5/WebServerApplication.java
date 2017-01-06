@@ -1,6 +1,7 @@
 package hr.unizg.fer.rassus.grupa5;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -8,13 +9,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.client.RestTemplate;
 
-
 @SpringBootApplication
 @EnableDiscoveryClient
+@EnableAutoConfiguration(exclude = { org.springframework.boot.autoconfigure.security.SecurityAutoConfiguration.class })
 @ComponentScan(useDefaultFilters = false) // Disable component scanner
 public class WebServerApplication {
 
-	public static final String WALKS_SERVICE_URL = "http://WALKS-SERVICE";
+	public static final String WALKS_SERVICE_URL = "http://WALKS-SERVICE/walks";
 
 	/**
 	 * Run the application using Spring Boot and an embedded servlet engine.
@@ -28,7 +29,7 @@ public class WebServerApplication {
 
 	/**
 	 * A customized RestTemplate that has the ribbon load balancer build in.
-	 * Note that prior to the "Brixton" 
+	 * Note that prior to the "Brixton"
 	 * 
 	 * @return
 	 */
@@ -39,7 +40,7 @@ public class WebServerApplication {
 	}
 
 	/**
-	 * The AccountService encapsulates the interaction with the micro-service.
+	 * The WebWalksService encapsulates the interaction with the micro-service.
 	 * 
 	 * @return A new service instance.
 	 */
@@ -57,5 +58,5 @@ public class WebServerApplication {
 	public WebWalksController walksController() {
 		return new WebWalksController(walksService());
 	}
-	
+
 }
