@@ -1,6 +1,5 @@
 package hr.unizg.fer.rassus.grupa5;
 
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.joda.time.DateTime;

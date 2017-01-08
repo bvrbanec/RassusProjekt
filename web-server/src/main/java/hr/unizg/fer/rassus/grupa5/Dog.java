@@ -1,19 +1,13 @@
 package hr.unizg.fer.rassus.grupa5;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 
-@Entity
 public class Dog {
 	
 	@Id
-	@GeneratedValue
 	private Long id;
-	
-	
 	private String name;
 	private String breed;
 	private String owner;

@@ -16,6 +16,7 @@ import org.springframework.web.client.RestTemplate;
 public class WebServerApplication {
 
 	public static final String WALKS_SERVICE_URL = "http://WALKS-SERVICE/walks";
+	public static final String DOGS_SERVICE_URL = "http://DOGS-SERVICE/dogs";
 
 	/**
 	 * Run the application using Spring Boot and an embedded servlet engine.
@@ -48,6 +49,11 @@ public class WebServerApplication {
 	public WebWalksService walksService() {
 		return new WebWalksService(WALKS_SERVICE_URL);
 	}
+	
+	@Bean
+	public WebDogsService dogsService() {
+		return new WebDogsService(DOGS_SERVICE_URL);
+	}
 
 	/**
 	 * Create the controller, passing it the {@link WebWalksService} to use.
@@ -57,6 +63,11 @@ public class WebServerApplication {
 	@Bean
 	public WebWalksController walksController() {
 		return new WebWalksController(walksService());
+	}
+	
+	@Bean
+	public WebDogsController dogsController() {
+		return new WebDogsController(dogsService());
 	}
 
 }
