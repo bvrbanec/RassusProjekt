@@ -1,0 +1,7 @@
+---
+applications:
+- name: vo44480-bzvz-app
+  memory: 768M
+  random-route: true
+  path: target/user-0.0.1-SNAPSHOT.jar
+#  buildpack: java_buildpack
