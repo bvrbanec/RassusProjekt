@@ -1,0 +1,15 @@
+security:
+  basic:
+    enabled: false
+management:
+  security:
+    enabled : false
+spring:
+  application:
+    name : registrations-service
+server:
+    port: 7778
+
+
+
+

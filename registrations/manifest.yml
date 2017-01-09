@@ -1,0 +1,8 @@
+---
+applications:
+- name: registrations
+  memory: 512M
+  instances: 1
+  host: registrations
+  domain: cfapps.io
+  buildpack: java_buildpack
