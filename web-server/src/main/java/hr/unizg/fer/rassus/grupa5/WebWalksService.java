@@ -23,6 +23,10 @@ public class WebWalksService {
 		this.walksServiceUrl = walksServiceUrl.startsWith("http") ? walksServiceUrl : "http://" + walksServiceUrl;
 	}
 
+	Walk findById(Long id) {
+		return restTemplate.getForObject(walksServiceUrl + "/{id}", Walk.class, id);
+	}
+	
 	List<Walk> findByDogId(Long dogId) {
 		Walk[] walks = null;
 		walks = restTemplate.getForObject(walksServiceUrl + "/dog/{dogId}", Walk[].class, dogId);
@@ -56,8 +60,6 @@ public class WebWalksService {
 		walks = restTemplate.getForObject(walksServiceUrl + "/active", Walk[].class);
 		if (walks == null || walks.length == 0){
 			System.out.println("nema dohvacenih setnji");
-			Walk emptyWalk = new Walk();
-			listWalks.add(emptyWalk);
 		}
 		else{
 			listWalks.addAll(Arrays.asList(walks));

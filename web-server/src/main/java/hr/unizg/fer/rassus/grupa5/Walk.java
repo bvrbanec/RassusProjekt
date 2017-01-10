@@ -9,12 +9,14 @@ public class Walk {
 	@Id
 	private Long id;
 	private Long dogId;
+	private String dogName;
 	private Long walkerId;
 	private Long ownerId;
-	private DateTime date;
+	private String ownerName;
 	private Integer duration;
 	private Integer distance;
 	private Integer price;
+	private Integer rating;
 
 	public Long getId() {
 		return id;
@@ -32,6 +34,22 @@ public class Walk {
 		this.dogId = dogId;
 	}
 
+	public String getDogName() {
+		return dogName;
+	}
+
+	public void setDogName(String dogName) {
+		this.dogName = dogName;
+	}
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
+	}
+
 	public Long getWalkerId() {
 		return walkerId;
 	}
@@ -46,14 +64,6 @@ public class Walk {
 
 	public void setOwnerId(Long ownerId) {
 		this.ownerId = ownerId;
-	}
-
-	public DateTime getDate() {
-		return date;
-	}
-
-	public void setDate(DateTime date) {
-		this.date = date;
 	}
 
 	public Integer getDuration() {
@@ -78,6 +88,14 @@ public class Walk {
 
 	public void setPrice(Integer price) {
 		this.price = price;
+	}
+
+	public Integer getRating() {
+		return rating;
+	}
+
+	public void setRating(Integer rating) {
+		this.rating = rating;
 	}
 
 }
