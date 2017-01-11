@@ -23,6 +23,11 @@ public class DogController {
 		this.dogsRepository = dogsRepository;
 	}
 	
+	@RequestMapping("/nameById/{Id}")
+	public String NamebyId(@PathVariable("Id") Long Id){
+		return dogsRepository.findNameById(Id);
+	}
+	
 	@RequestMapping("/dog/{Id}")
 	public List<Dog> byId(@PathVariable("Id") Long Id) {
 		return dogsRepository.findById(Id);
