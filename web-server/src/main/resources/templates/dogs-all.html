@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+	<h1>Registered dogs</h1>
+
+	<div th:if="${dogList}">
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name of the dog</th>
+					<th>Breed</th>
+					<th>Name of the owner</th>
+					<th>Age</th>
+					<th>Gender</th>
+					<th>Health condition</th>
+					<th>Hair color</th>
+					<th>Eye color</th>
+					<th>Weight</th>
+					<th>Height</th>
+					<th>Hair length</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="dog : ${dogList}">
+					<td th:text="|${dog.dogName}|"></td>
+					<td th:text="${dog.dogBreed}"></td>
+					<td th:text="${dog.dogOwner}"></td>
+					<td th:text="${dog.dogAge}"></td>
+					<td th:text="${dog.dogGender}"></td>
+					<td th:text="${dog.dogHealthCondition}"></td>
+					<td th:text="${dog.dogHairColor}"></td>
+					<td th:text="${dog.dogEyeColor}"></td>
+					<td th:text="${dog.dogWeight}"></td>
+					<td th:text="${dog.dogHeight}"></td>
+					<td th:text="${dog.dogHairLength}"></td>
+				</tr> 
+			</tbody>
+		</table>
+	</div>
+<div th:replace="footer :: copy"></div>
+</body>
+</html>
