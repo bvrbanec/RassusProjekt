@@ -6,7 +6,9 @@
 
 <body>
 	<h1>Login</h1>
-	
+	<br/>
+	<span th:if="${loginErr != null}" th:text="${loginErr}">[[{$loginErr}]]</span>
+	<br/>
 	<form action="#" th:object="${login}" method="POST"
 		th:action="@{/registrations/login}" class="form-horizontal">
  

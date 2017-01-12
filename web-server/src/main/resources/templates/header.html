@@ -41,30 +41,29 @@
 				<span class="icon-bar"></span>
 				<!-- Home -->
 				<span class="icon-bar"></span>
-				<!-- This Blog -->
-				<span class="icon-bar"></span>
-				<!-- Other Blogs -->
-				<span class="icon-bar"></span>
 				<!-- Register -->
 				<span class="icon-bar"></span>
 				<!-- Login -->
+				<span class="icon-bar"></span>
+				<!-- All registrations-->
+				<span class="icon-bar"></span>
+				<!-- Logout -->
 			</button>
 		</div>
 
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
 			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav" th:unless="${session.loggedInUser}">
 				<li class="active"><a href="/" th:href="@{/}">Home</a></li>
-				<li><a
-					href="https://spring.io/blog/2015/07/14/microservices-with-spring">This
-						Blog</a></li>
-				<li><a href="http://spring.io/blog">Other Blogs</a></li>
-				<li><a href="http://localhost:9876/registrations/register">Register</a></li>
-				<li><a href="http://localhost:9876/registrations/login">Login</a></li>
-				<li><a href="http://localhost:9876/registrations/all">All registratins</a></li>
+  				<li ><a href="http://localhost:9876/registrations/register">Register</a></li>
+				<li ><a href="http://localhost:9876/registrations/login">Login</a></li>
 			</ul>
-
+			<ul class="nav navbar-nav" th:if="${session.loggedInUser}">
+			<li class="active"><a href="/" th:href="@{/}">Home</a></li>
+				<li ><a href="http://localhost:9876/registrations/all">All registrations</a></li>
+				<li ><a href="http://localhost:9876/registrations/logout">Logout</a></li>
+			</ul>
 		</div>
 		<!-- /.navbar-collapse -->
 	</nav>

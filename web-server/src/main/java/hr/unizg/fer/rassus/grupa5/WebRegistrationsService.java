@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Service;
@@ -42,17 +44,15 @@ public class WebRegistrationsService {
 	}
 	
 	
-	public String register(Registration reg) {
+	public String register(Registration reg,Model model) {
 		restTemplate.postForObject(registrationsServiceUrl + "/create", reg, Registration.class);
+		 model.addAttribute("login", new Login());
 		return "login";
 	}
 
-	public String login(Login login) {
-		Login log=restTemplate.postForObject(registrationsServiceUrl + "/login", login, Login.class);
-		if (log==null)
-			return "login";
-		else
-			return "succesfullogin";
+	public Registration login(Login login) {
+		Registration reg=restTemplate.postForObject(registrationsServiceUrl + "/login", login, Registration.class);
+		return reg;
 	}
 	
 	

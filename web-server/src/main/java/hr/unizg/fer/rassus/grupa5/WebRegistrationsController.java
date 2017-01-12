@@ -3,6 +3,8 @@ package hr.unizg.fer.rassus.grupa5;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -38,14 +40,19 @@ public class WebRegistrationsController {
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Model model) {
 		model.addAttribute("registration", new Registration());
+		//kad vladimir napravi
+		//List<User> users = new ArrayList<User>();
+		//users = usersService.getAll();
+		//System.out.println("useri su"+users);
+		//model.addAttribute("users",users);
 		return "register";
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
 			produces=MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String createRegistration(Registration registration) {
-		return registrationsService.register(registration);
+	public String createRegistration(Registration registration,Model model) {
+		return registrationsService.register(registration,model);
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
@@ -56,11 +63,26 @@ public class WebRegistrationsController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
 			produces=MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String checkLogin(Login login) {
-		System.out.println("imam login");
-		return registrationsService.login(login);
+	public String checkLogin(Login login,HttpSession session, Model model) {
+		
+		Registration reg=registrationsService.login(login);
+		if(reg==null)
+		{
+			model.addAttribute("loginErr", "Username or password incorrect");
+			return "login";
+		}
+		//System.out.println("imam login "+reg.getUsername());
+		session.setAttribute("loggedInUser", reg);
+		System.out.println(session.getAttribute("myName"));
+		return "home";
+		
 	}
-
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session,Model model) {
+		session.removeAttribute("loggedInUser");
+		model.addAttribute("login", new Login());
+		return "login";
+	}
 	
 	/*
 	@RequestMapping("/walker/{walkerId}")
