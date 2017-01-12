@@ -54,7 +54,25 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public List<User> getAll() {
-		return userRepository.findAll();
+		return userRepository.findByActiveTrue();
 	}
+	
+	@Override
+	public List<User> saveUserAndGetAll(User user) {
+		userRepository.save(user);
+		return getAll();
+	}
+	
+	@Override
+	public List<User> deactivateAndGetAll(User user) {
+		user.setActive(false);
+		return saveUserAndGetAll(user);
+	}
+	
+	@Override
+	public List<User> deactivateUserByIdAndGetAll(long id) {
+		return deactivateAndGetAll(userRepository.findOne(id));
+	}
+	
 
 }

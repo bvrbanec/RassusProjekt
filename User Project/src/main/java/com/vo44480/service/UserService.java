@@ -20,4 +20,10 @@ public interface UserService {
 	
 	User saveUser(User user);
 
+	List<User> saveUserAndGetAll(User user);
+
+	List<User> deactivateAndGetAll(User user);
+
+	List<User> deactivateUserByIdAndGetAll(long id);
+
 }
