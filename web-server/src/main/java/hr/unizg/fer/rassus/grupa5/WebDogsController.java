@@ -43,7 +43,7 @@ public class WebDogsController {
 		return dogsService.register(registration);
 	}
 	
-	@RequestMapping("/DogNameById/{id}")
+	@RequestMapping("/nameById/{id}")
 	public String byDogNamebyId(Model model, @PathVariable("id") Long Id){
 		Dog dog = new Dog();
 		dog = (Dog) dogsService.findById(Id);
