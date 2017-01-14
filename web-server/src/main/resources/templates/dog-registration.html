@@ -6,16 +6,16 @@
 <body>
 <h1>Dog registration</h1>
 	
-	<form action="#" th:object="${dogRegistration}" method="POST"
+	<form action="#" th:object="${dog}" method="POST"
 		th:action="@{/dogs/register}" class="form-horizontal">
  
 		
 		<div class="form-group">
 		
-			<label for="dogName" class="control-label col-xs-2">Name of the Dog:</label>
+			<label for="name" class="control-label col-xs-2">Name of the Dog:</label>
 			<div class="col-xs-2">
-				<input type="text" class="form-control" id="dogName"
-					th:field="*{dogName}" placeholder="Enter the name of your dog"
+				<input type="text" class="form-control" id="name"
+					th:field="*{name}" placeholder="Enter the name of your dog"
 					style="width: 30em;" />
 			</div>
 			<div class="col-xs-8"></div>
@@ -23,10 +23,10 @@
 		</div>
 		<div class="form-group">
 		
-			<label for="dogBreed" class="control-label col-xs-2">Breed:</label>
+			<label for="breed" class="control-label col-xs-2">Breed:</label>
 			<div class="col-xs-2">
-				<input type="text" class="form-control" id="dogBreed"
-					th:field="*{dogBreed}" placeholder="Enter the breed of your dog"
+				<input type="text" class="form-control" id="breed"
+					th:field="*{breed}" placeholder="Enter the breed of your dog"
 					style="width: 30em;" />
 			</div>
 			<div class="col-xs-8"></div>
@@ -34,10 +34,10 @@
 		</div>
 		<div class="form-group">
 		
-			<label for="dogOwner" class="control-label col-xs-2">Dog owner:</label>
+			<label for="owner" class="control-label col-xs-2">Dog owner:</label>
 			<div class="col-xs-2">
-				<input type="text" class="form-control" id="dogOwner"
-					th:field="*{dogOwner}" placeholder="Enter name and surname of the dog owner"
+				<input type="text" class="form-control" id="owner"
+					th:field="*{owner}" placeholder="Enter name and surname of the dog owner"
 					style="width: 30em;" />
 			</div>
 			<div class="col-xs-8"></div>
@@ -45,10 +45,10 @@
 		</div>
 		<div class="form-group">
 		
-			<label for="dogAge" class="control-label col-xs-2">Age:</label>
+			<label for="age" class="control-label col-xs-2">Age:</label>
 			<div class="col-xs-2">
-				<input type="text" class="form-control" id="dogAge"
-					th:field="*{dogAge}" placeholder="Enter how old your dog is in years"
+				<input type="text" class="form-control" id="age"
+					th:field="*{age}" placeholder="Enter how old your dog is in years"
 					style="width: 30em;" />
 			</div>
 			<div class="col-xs-8"></div>
@@ -56,38 +56,10 @@
 		</div>
 		<div class="form-group">
 		
-			<label for="dogGender" class="control-label col-xs-2">Gender:</label>
+			<label for="gender" class="control-label col-xs-2">Gender:</label>
 			<div class="col-xs-2">
-				<input type="radio" class="form-control" id="dogGender"
-					th:field="*{dogGender}" value="female" />female<br>
-				<input type="radio" class="form-control" id="dogGender"
-					th:field="*{dogGender}" value="male" />male<br>
-					
-			</div>
-			<div class="col-xs-8"></div>
-			
-		</div>
-		<div class="form-group">
-		
-			<label for="dogHealthCondition" class="control-label col-xs-2">Health condition:</label>
-			<div class="col-xs-2">
-				<input type="radio" class="form-control" id="dogHealthCondition"
-					th:field="*{dogHealthCondition}" value="healthy"/>healthy<br>
-				<input type="radio" class="form-control" id="dogGender"
-					th:field="*{dogHealthCondition}" value="fewProblems" />has few health problems<br>
-				<input type="radio" class="form-control" id="dogGender"
-					th:field="*{dogHealthCondition}" value="needSpecialCare" />needs special care during the walk<br>
-					
-			</div>
-			<div class="col-xs-8"></div>
-			
-		</div>
-		<div class="form-group">
-		
-			<label for="dogHairColor" class="control-label col-xs-2">Hair color:</label>
-			<div class="col-xs-2">
-				<input type="text" class="form-control" id="dogHairColor"
-					th:field="*{dogHairColor}" placeholder="Enter the color of your dogs hair"
+					<input type="text" class="form-control" id="gender"
+					th:field="*{gender}" placeholder="Enter female/male"
 					style="width: 30em;" />
 			</div>
 			<div class="col-xs-8"></div>
@@ -95,10 +67,10 @@
 		</div>
 		<div class="form-group">
 		
-			<label for="dogEyeColor" class="control-label col-xs-2">Eye color:</label>
+			<label for="health" class="control-label col-xs-2">Health condition:</label>
 			<div class="col-xs-2">
-				<input type="text" class="form-control" id="dogEyeColor"
-					th:field="*{dogEyeColor}" placeholder="Enter the color of your dogs eyes"
+				<input type="text" class="form-control" id="health"
+					th:field="*{health}" placeholder="Enter your dogs health condition (weather he needs some special care)"
 					style="width: 30em;" />
 			</div>
 			<div class="col-xs-8"></div>
@@ -106,10 +78,10 @@
 		</div>
 		<div class="form-group">
 		
-			<label for="dogWeight" class="control-label col-xs-2">Weight:</label>
+			<label for="hairColour" class="control-label col-xs-2">Hair color:</label>
 			<div class="col-xs-2">
-				<input type="text" class="form-control" id="dogWeight"
-					th:field="*{dogWeight}" placeholder="Enter how much kilos your dog weights"
+				<input type="text" class="form-control" id="hairColour"
+					th:field="*{hairColour}" placeholder="Enter the color of your dogs hair"
 					style="width: 30em;" />
 			</div>
 			<div class="col-xs-8"></div>
@@ -117,10 +89,10 @@
 		</div>
 		<div class="form-group">
 		
-			<label for="dogHeight" class="control-label col-xs-2">Height:</label>
+			<label for="eyeColour" class="control-label col-xs-2">Eye color:</label>
 			<div class="col-xs-2">
-				<input type="text" class="form-control" id="dogHeight"
-					th:field="*{dogHeight}" placeholder="Enter how tall your dog is in cm"
+				<input type="text" class="form-control" id="eyeColour"
+					th:field="*{eyeColour}" placeholder="Enter the color of your dogs eyes"
 					style="width: 30em;" />
 			</div>
 			<div class="col-xs-8"></div>
@@ -128,16 +100,33 @@
 		</div>
 		<div class="form-group">
 		
-			<label for="dogHairLength" class="control-label col-xs-2">Hair length:</label>
+			<label for="weight" class="control-label col-xs-2">Weight:</label>
 			<div class="col-xs-2">
-				<input type="radio" class="form-control" id="dogHairLength"
-					th:field="*{dogHairLength}" value="short" />short<br>
-				<input type="radio" class="form-control" id="dogHairLength"
-					th:field="*{dogHairLength}" value="medium"/>medium<br>
-				<input type="radio" class="form-control" id="dogHairLength"
-					th:field="*{dogHairLength}" value="long" />long<br>
-				<input type="radio" class="form-control" id="dogHairLength"
-					th:field="*{dogHairLength}" value="noHair" />no hair<br>
+				<input type="text" class="form-control" id="weight"
+					th:field="*{weight}" placeholder="Enter how much kilos your dog weights"
+					style="width: 30em;" />
+			</div>
+			<div class="col-xs-8"></div>
+			
+		</div>
+		<div class="form-group">
+		
+			<label for="height" class="control-label col-xs-2">Height:</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="height"
+					th:field="*{height}" placeholder="Enter how tall your dog is in cm"
+					style="width: 30em;" />
+			</div>
+			<div class="col-xs-8"></div>
+			
+		</div>
+		<div class="form-group">
+		
+			<label for="hairLength" class="control-label col-xs-2">Hair length:</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="hairLength"
+					th:field="*{hairLength}" placeholder="Enter long/medium/short/no hair"
+					style="width: 30em;" />
 					
 			</div>
 			<div class="col-xs-8"></div>

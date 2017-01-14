@@ -26,7 +26,7 @@ public class WebDogsService {
 
 		Dog[] regs = null;
 		List<Dog> listDogRegistrations = new ArrayList<Dog>();
-		regs = restTemplate.getForObject(dogsServiceUrl + "/allDogs", Dog[].class);
+		regs = restTemplate.getForObject(dogsServiceUrl + "/all", Dog[].class);
 		System.out.println("all dogs: "+ regs);
 		if (regs == null || regs.length == 0){
 			System.out.println("no dogs registered");
@@ -43,7 +43,7 @@ public class WebDogsService {
 	
 	public String register(Dog registration) {
 		restTemplate.postForObject(dogsServiceUrl + "/create", registration, Dog.class);
-		return "dog-list";
+		return "dogs-all";
 	}
 	
 	String findDogNameById(Long dogId){
