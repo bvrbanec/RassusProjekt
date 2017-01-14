@@ -60,6 +60,7 @@ public class UserController {
 		u.setLastName("prezime");
 		u.setUsername("bbb");
 		u.setEmail("vladimir"+UUID.randomUUID().toString()+"@");
+		u.setWalker(true);
 		return userService.saveUser(u);
 	}
 	
@@ -122,6 +123,12 @@ public class UserController {
 			produces = {MediaType.APPLICATION_JSON_VALUE})
 	public List<User> deleteUser(@PathVariable long id){
 		return userService.deactivateUserByIdAndGetAll(id);
+	}
+	
+	@RequestMapping(path = "/regUser", method=RequestMethod.POST,
+			produces = {MediaType.APPLICATION_JSON_VALUE})
+	public User saveUserAndReturn(@RequestBody User user) {
+		return userService.saveUser(user);
 	}
 
 }

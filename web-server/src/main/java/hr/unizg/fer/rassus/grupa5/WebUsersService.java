@@ -13,4 +13,6 @@ public interface WebUsersService {
 
 	List<User> deactivateUserByIdAndGetAll(long id);
 
+	User saveUser(User user);
+
 }

@@ -2,6 +2,8 @@ package hr.unizg.fer.rassus.grupa5;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,6 +56,15 @@ public class WebUsersController {
 		model.addAttribute("formUser", new User());
 		model.addAttribute("users", users);
 		return "users-view";	
+	}
+	
+	@RequestMapping(path = "/profile", method = RequestMethod.GET)
+	public String profileUser(HttpSession session, Model model){
+//		User user = usersService.findById(id);
+		Registration reg = (Registration) session.getAttribute("loggedInUser");
+		User user = usersService.findById(reg.getPersonId());
+		model.addAttribute("formUser", user != null ? user : new User());//, user != null ? user : new User());
+		return "my-user";
 	}
 	
 	

@@ -22,7 +22,16 @@ public class User {
 	@Column(unique = true, nullable = false)
 	private String email;
 	private boolean active = true;
+	private boolean walker = true;
 	
+	public boolean isWalker() {
+		return walker;
+	}
+
+	public void setWalker(boolean walker) {
+		this.walker = walker;
+	}
+
 	private String telephoneNumber;
 	
 	public Long getId() {

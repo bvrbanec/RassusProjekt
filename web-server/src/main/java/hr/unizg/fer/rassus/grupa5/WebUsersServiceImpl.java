@@ -38,12 +38,13 @@ public class WebUsersServiceImpl implements WebUsersService{
 		for (int i = 0; i < 4; ++i) {
 			User user = new User();
 			user.setId(Long.valueOf(i));
-			user.setFirstName("Probnoime"); //Ideja je dohvatiti ime psa preko dogs servisa za dog ID - webDogsService.findNameById(dogId)
-			user.setLastName("probnoprezime"); //Isto tako dohvatiti ime vlasnika za owner ID - webPeopleService.findNameById(ownerId)
+			user.setFirstName("Probnoime");
+			user.setLastName("probnoprezime");
 			user.setUsername("korisnickoime");
 			user.setActive(true);
 			user.setEmail("mail");
 			user.setTelephoneNumber("tel");
+			user.setWalker(true);
 			list.add(user);
 		}
 		users = list;
@@ -82,9 +83,14 @@ public class WebUsersServiceImpl implements WebUsersService{
 		                    HttpMethod.POST, new HttpEntity<User>(user), new ParameterizedTypeReference<List<User>>() {
 		            });
 		List<User> users = usersResponse.getBody();
+		
 		return users;
 	}
 	
+	public User saveUser(User user) {
+		return restTemplate.postForObject(usersServiceUrl + "/regUser", user, User.class);
+		
+	}
 	
 	
 

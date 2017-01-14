@@ -18,7 +18,7 @@ public class WebServerApplication {
 	public static final String WALKS_SERVICE_URL = "http://WALKS-SERVICE/walks";
 	public static final String DOGS_SERVICE_URL = "http://DOGS-SERVICE/dogs";
 	public static final String HOME_SERVICE_URL = "http://";
-	public static final String REGISTRATIONS_SERVICE_URL = "http://REGISTRATIONS_SERVICE/";
+	public static final String REGISTRATIONS_SERVICE_URL = "http://REGISTRATIONS-SERVICE/registrations";
 	public static final String USERS_SERVICE_URL = "http://USERS-SERVICE/users";
 	
 

@@ -12,10 +12,19 @@ public class User {
 	private String lastName;
 	private String email;
 	private boolean active = true;
+	private boolean walker = true;
 	private String telephoneNumber;
 
 	public Long getId() {
 		return id;
+	}
+
+	public boolean isWalker() {
+		return walker;
+	}
+
+	public void setWalker(boolean walker) {
+		this.walker = walker;
 	}
 
 	public void setId(Long id) {
