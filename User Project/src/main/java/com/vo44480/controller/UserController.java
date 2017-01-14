@@ -3,6 +3,7 @@ package com.vo44480.controller;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.sql.DataSource;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
@@ -56,9 +58,17 @@ public class UserController {
 		User u = new User();
 		u.setFirstName("ime");
 		u.setLastName("prezime");
-		u.setNumOfDogs(5);
 		u.setUsername("bbb");
+		u.setEmail("vladimir"+UUID.randomUUID().toString()+"@");
+		u.setWalker(true);
 		return userService.saveUser(u);
+	}
+	
+	@RequestMapping(path="/special/{id}", method=RequestMethod.GET)
+	@ResponseBody
+	public String getUserTailorMade(long id){
+		User u = findById(id);
+		return u.getFirstName() + u.getLastName();
 	}
 	
 	@RequestMapping(method=RequestMethod.GET,
@@ -105,7 +115,19 @@ public class UserController {
 
 	@RequestMapping(method=RequestMethod.POST,
 			produces = {MediaType.APPLICATION_JSON_VALUE})
-	public User saveUser(@RequestBody User user) {
+	public List<User> saveUser(@RequestBody User user) {
+		return userService.saveUserAndGetAll(user);
+	}
+	
+	@RequestMapping(path="/{id}", method=RequestMethod.DELETE,
+			produces = {MediaType.APPLICATION_JSON_VALUE})
+	public List<User> deleteUser(@PathVariable long id){
+		return userService.deactivateUserByIdAndGetAll(id);
+	}
+	
+	@RequestMapping(path = "/regUser", method=RequestMethod.POST,
+			produces = {MediaType.APPLICATION_JSON_VALUE})
+	public User saveUserAndReturn(@RequestBody User user) {
 		return userService.saveUser(user);
 	}
 

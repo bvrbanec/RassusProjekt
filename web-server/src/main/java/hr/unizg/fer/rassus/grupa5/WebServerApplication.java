@@ -18,7 +18,8 @@ public class WebServerApplication {
 	public static final String WALKS_SERVICE_URL = "http://WALKS-SERVICE/walks";
 	public static final String DOGS_SERVICE_URL = "http://DOGS-SERVICE/dogs";
 	public static final String HOME_SERVICE_URL = "http://";
-	public static final String REGISTRATIONS_SERVICE_URL = "http://REGISTRATIONS_SERVICE/";
+	public static final String REGISTRATIONS_SERVICE_URL = "http://REGISTRATIONS-SERVICE/registrations";
+	public static final String USERS_SERVICE_URL = "http://USERS-SERVICE/users";
 	
 
 	/**
@@ -67,6 +68,11 @@ public class WebServerApplication {
 	public WebHomeService homeService() {
 		return new WebHomeService(HOME_SERVICE_URL);
 	}
+	
+	@Bean
+	public WebUsersServiceImpl usersService() {
+		return new WebUsersServiceImpl(USERS_SERVICE_URL);
+	}
 
 	/**
 	 * Create the controller, passing it the {@link WebWalksService} to use.
@@ -75,7 +81,7 @@ public class WebServerApplication {
 	 */
 	@Bean
 	public WebWalksController walksController() {
-		return new WebWalksController(walksService());
+		return new WebWalksController(walksService(), dogsService());
 	}
 	
 	@Bean
@@ -85,12 +91,17 @@ public class WebServerApplication {
 	
 	@Bean
 	public WebRegistrationsController registrationsController() {
-		return new WebRegistrationsController(registrationsService());
+		return new WebRegistrationsController(registrationsService(),usersService());
 	}
 	
 	@Bean
 	public WebHomeController homeController() {
 		return new WebHomeController(homeService());
+	}
+	
+	@Bean
+	public WebUsersController usersController() {
+		return new WebUsersController(usersService());
 	}
 
 }

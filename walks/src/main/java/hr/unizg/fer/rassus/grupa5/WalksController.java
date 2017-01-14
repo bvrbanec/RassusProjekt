@@ -20,6 +20,11 @@ public class WalksController {
 		this.walkRepository = walkRepository;
 	}
 	
+	@RequestMapping("{id}")
+	public Walk byId(@PathVariable("id") Long id) {
+		return walkRepository.findById(id);
+	}
+	
 	@RequestMapping("/dog/{dogId}")
 	public List<Walk> byDog(@PathVariable("dogId") Long dogId) {
 		return walkRepository.findByDogId(dogId);

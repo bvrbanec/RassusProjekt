@@ -11,6 +11,7 @@ public class Walk {
 	private Long dogId;
 	private String dogName;
 	private Long walkerId;
+	private String walkerName;
 	private Long ownerId;
 	private String ownerName;
 	private Integer duration;
@@ -56,6 +57,14 @@ public class Walk {
 
 	public void setWalkerId(Long walkerId) {
 		this.walkerId = walkerId;
+	}
+
+	public String getWalkerName() {
+		return walkerName;
+	}
+
+	public void setWalkerName(String walkerName) {
+		this.walkerName = walkerName;
 	}
 
 	public Long getOwnerId() {

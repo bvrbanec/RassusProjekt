@@ -3,6 +3,8 @@ package hr.unizg.fer.rassus.grupa5;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -20,9 +22,12 @@ public class WebRegistrationsController {
 	
 	@Autowired
 	protected WebRegistrationsService registrationsService;
-
-	public WebRegistrationsController(WebRegistrationsService registrationsService) {
+	@Autowired
+	protected WebUsersServiceImpl usersService;
+	
+	public WebRegistrationsController(WebRegistrationsService registrationsService, WebUsersServiceImpl us) {
 		this.registrationsService = registrationsService;
+		this.usersService=us;
 	}
 	
 
@@ -44,8 +49,13 @@ public class WebRegistrationsController {
 	@RequestMapping(value = "/register", method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
 			produces=MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String createRegistration(Registration registration) {
-		return registrationsService.register(registration);
+	public String createRegistration(Registration registration,Model model) {
+		User us=new User();
+		us.setEmail(registration.getEmail());
+		us.setUsername(registration.getUsername());
+		User usr=usersService.saveUser(us);
+		registration.setPersonId(usr.getId());
+		return registrationsService.register(registration,model);
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
@@ -56,48 +66,27 @@ public class WebRegistrationsController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST,
 			consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
 			produces=MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String checkLogin(Login login) {
-		System.out.println("imam login");
-		return registrationsService.login(login);
+	public String checkLogin(Login login,HttpSession session, Model model) {
+		
+		Registration reg=registrationsService.login(login);
+		if(reg==null)
+		{
+			model.addAttribute("loginErr", "Username or password incorrect");
+			return "login";
+		}
+		//System.out.println("imam login "+reg.getUsername());
+		session.setAttribute("loggedInUser", reg);
+		//session.get
+		System.out.println(session.getAttribute("myName"));
+		return "home";
+		
 	}
-
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
+	public String logout(HttpSession session,Model model) {
+		session.removeAttribute("loggedInUser");
+		model.addAttribute("login", new Login());
+		return "login";
+	}
 	
-	/*
-	@RequestMapping("/walker/{walkerId}")
-	public String byWalker(Model model, @PathVariable("walkerId") Long walkerId) {
-		List<Walk> walks = new ArrayList<Walk>();
-		walks = walksService.findByWalkerId(walkerId);
-		model.addAttribute("walkerWalks", walks);
-		return "walker-walks";
-	}
 
-	@RequestMapping("/owner/{ownerId}")
-	public String byOwner(Model model, @PathVariable("ownerId") Long ownerId) {
-		List<Walk> walks = new ArrayList<Walk>();
-		walks = walksService.findByWalkerId(ownerId);
-		model.addAttribute("ownerWalks", walks);
-		return "owner-walks";
-	}
-
-	@RequestMapping(value = "/active", method = RequestMethod.GET)
-	public String activeWalks(Model model) {
-		List<Walk> walks = new ArrayList<Walk>();
-		walks = walksService.findByWalkerIdIsNull();
-		System.out.println("setnje");
-		System.out.println(walks.get(0).getPrice());
-		model.addAttribute("activeWalks", walks);
-		return "active-walks";
-	}
-	*/
-/*
-	@RequestMapping(value = "/offer", method = RequestMethod.POST)
-	public Walk offerWalk(@RequestBody Walk walk) {
-		return walksService.offerWalk(walk);
-	}
-
-	@RequestMapping(value = "/accept", method = RequestMethod.POST)
-	public Walk acceptOffer(@RequestBody Walk walk) {
-		return walksService.acceptOffer(walk);
-	}
-*/
 }

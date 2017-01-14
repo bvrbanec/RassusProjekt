@@ -6,6 +6,8 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface WalkRepository extends CrudRepository<Walk, Long> {
 
+	Walk findById(Long id);
+	
 	List<Walk> findByDogId(Long dogId);
 
 	List<Walk> findByWalkerId(Long walkerId);

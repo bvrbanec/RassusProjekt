@@ -1,41 +1,30 @@
-package com.vo44480.model;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+package hr.unizg.fer.rassus.grupa5;
 
-@Entity
-@Table(name="T_USER")
+import javax.persistence.Column;
+import javax.persistence.Id;
+
+
 public class User {
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
-	
 	private String username;
-	
 	private String firstName;
-	
 	private String lastName;
-	@Column(unique = true, nullable = false)
 	private String email;
 	private boolean active = true;
 	private boolean walker = true;
-	
+	private String telephoneNumber;
+
+	public Long getId() {
+		return id;
+	}
+
 	public boolean isWalker() {
 		return walker;
 	}
 
 	public void setWalker(boolean walker) {
 		this.walker = walker;
-	}
-
-	private String telephoneNumber;
-	
-	public Long getId() {
-		return id;
 	}
 
 	public void setId(Long id) {
@@ -90,6 +79,7 @@ public class User {
 		this.telephoneNumber = telephoneNumber;
 	}
 
-
+	
+	
 	
 }

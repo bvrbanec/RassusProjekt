@@ -13,7 +13,6 @@ public class Walk {
 	private Long dogId;
 	private Long walkerId;
 	private Long ownerId;
-	private LocalDateTime date;
 	private Integer duration;
 	private Integer distance;
 	private Integer price;
@@ -48,14 +47,6 @@ public class Walk {
 
 	public void setOwnerId(Long ownerId) {
 		this.ownerId = ownerId;
-	}
-
-	public LocalDateTime getDate() {
-		return date;
-	}
-
-	public void setDate(LocalDateTime date) {
-		this.date = date;
 	}
 
 	public Integer getDuration() {
