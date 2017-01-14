@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head th:substituteby="header :: copy">
+<title>Owner's walks</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<div th:if="${#lists.isEmpty(ownerWalks)}" class="error">
+		This owner has no walk offers.
+		<div style="height: 2cm">&nbsp;</div>
+	</div>
+
+	<div th:unless="${#lists.isEmpty(ownerWalks)}">
+		<h3>All <span th:text="${ownerName}"></span>'s offers</h3>
+		
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Dog</th>
+					<th>Distance</th>
+					<th>Duration</th>
+					<th>Price</th>
+					<th>Walker</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="walk : ${ownerWalks}">
+					<form action="#" th:action="@{/walks/accept}" th:object="${walk}"
+						method="POST">
+					<td th:text="${walk.dogName}"></td>
+					<td th:text="${walk.distance}"></td>
+					<td th:text="${walk.duration}"></td>
+					<td th:text="${walk.price}"></td>
+					
+					<td  th:if="!${walk.walkerId}"><input type="hidden" th:value="${walk.id}"
+						th:attr="name='id'" />
+						<button type="submit">Accept</button></td>
+   					<td  th:if="${walk.walkerId}" th:text="${walk.walkerName}"></td>
+					</form>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:substituteby="footer :: copy"></div>
+</body>
+</html>

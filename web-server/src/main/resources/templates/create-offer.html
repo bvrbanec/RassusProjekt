@@ -1,0 +1,64 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+<body>
+	<h1>Create offer</h1>
+
+	<form action="#" th:object="${walk}" method="POST"
+		th:action="@{/walks/offer}" class="form-horizontal">
+		
+		<div class="form-group">
+			<label for="distance" class="control-label col-xs-2">Dog:</label>
+			<div class="col-xs-2">
+				<select th:field="*{dogId}">
+					<option th:each="dog : ${dogs}" th:value="${dog.id}"
+						th:text="${dog.name}"></option>
+				</select>
+			</div>
+			<div class="col-xs-8"></div>
+		</div>
+
+		<div class="form-group">
+			<label for="distance" class="control-label col-xs-2">Distance:</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id=".distance"
+					th:field="*{distance}" placeholder="Distance in meters"
+					style="width: 30em;" />
+			</div>
+			<div class="col-xs-8"></div>
+		</div>
+
+		<div class="form-group">
+			<label for="duration" class="control-label col-xs-2">Duration:</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="duration"
+					th:field="*{duration}" placeholder="Duration in minutes"
+					style="width: 30em;" />
+			</div>
+			<div class="col-xs-8"></div>
+		</div>
+
+		<div class="form-group">
+			<label for="price" class="control-label col-xs-2">Price:</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="price"
+					th:field="*{price}" placeholder="Price in kn" style="width: 30em;" />
+			</div>
+			<div class="col-xs-8"></div>
+		</div>
+
+
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary">Create</button>
+			</div>
+		</div>
+
+
+	</form>
+
+	<div th:replace="footer :: copy"></div>
+</body>
+</html>

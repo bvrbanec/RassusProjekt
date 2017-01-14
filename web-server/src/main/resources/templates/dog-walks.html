@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head th:substituteby="header :: copy">
+<title>Dog's walks</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<div th:if="${#lists.isEmpty(dogWalks)}" class="error">
+		This dog has no walking records.
+		<div style="height: 2cm">&nbsp;</div>
+	</div>
+
+	<div th:unless="${#lists.isEmpty(dogWalks)}">
+		<h3>All walk offers for <span th:text="${dogName}"></span></h3>
+		
+
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Distance</th>
+					<th>Duration</th>
+					<th>Price</th>
+					<th>Walker</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="walk : ${dogWalks}">
+					<form action="#" th:action="@{/walks/accept}" th:object="${walk}"
+						method="POST">
+					<td th:text="${walk.distance}"></td>
+					<td th:text="${walk.duration}"></td>
+					<td th:text="${walk.price}"></td>
+					
+					<td  th:if="!${walk.walkerId}"><input type="hidden" th:value="${walk.id}"
+						th:attr="name='id'" />
+						<button type="submit">Accept</button></td>
+   					<td  th:if="${walk.walkerId}" th:text="${walk.walkerName}"></td>
+					</form>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:substituteby="footer :: copy"></div>
+</body>
+</html>
