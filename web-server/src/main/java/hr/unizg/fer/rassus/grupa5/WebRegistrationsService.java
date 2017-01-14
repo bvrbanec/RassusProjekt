@@ -59,47 +59,5 @@ public class WebRegistrationsService {
 	
 	
 	
-	
-	/*
-	List<Walk> findByWalkerId(Long walkerId) {
-		Walk[] walks = null;
-		walks = restTemplate.getForObject(walksServiceUrl + "/walker/{walkerId}", Walk[].class, walkerId);
-		if (walks == null || walks.length == 0)
-			return null;
-		else
-			return Arrays.asList(walks);
-	}
 
-	List<Walk> findByOwnerId(Long ownerId) {
-		Walk[] walks = null;
-		walks = restTemplate.getForObject(walksServiceUrl + "/owner/{ownerId}", Walk[].class, ownerId);
-		if (walks == null || walks.length == 0)
-			return null;
-		else
-			return Arrays.asList(walks);
-	}
-
-	List<Walk> findByWalkerIdIsNull() {
-		Walk[] walks = null;
-		List<Walk> listWalks = new ArrayList<Walk>();
-		walks = restTemplate.getForObject(walksServiceUrl + "/active", Walk[].class);
-		if (walks == null || walks.length == 0){
-			System.out.println("nema dohvacenih setnji");
-			Walk emptyWalk = new Walk();
-			listWalks.add(emptyWalk);
-		}
-		else{
-			listWalks.addAll(Arrays.asList(walks));
-		}
-		return listWalks;
-	}
-
-	public Walk offerWalk(Walk walk) {
-		return restTemplate.postForObject(walksServiceUrl + "/offer", walk, Walk.class);
-	}
-
-	public Walk acceptOffer(Walk walk) {
-		return restTemplate.postForObject(walksServiceUrl + "/accept", walk, Walk.class);
-	}
-	*/
 }

@@ -15,6 +15,7 @@
 					<th>Username</th>
 					<th>Password</th>
 					<th>Email</th>
+					<th>PersonId</th>
 				</tr>
 			</thead>
 
@@ -23,6 +24,7 @@
 					<td th:text="|${registration.username}|"></td>
 					<td th:text="${registration.password}">0</td>
 					<td th:text="${registration.email}">Email</td>
+					<td th:text="${registration.personId}">PersonId</td>
 				</tr> 
 			</tbody>
 		</table>

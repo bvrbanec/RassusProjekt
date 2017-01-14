@@ -91,7 +91,7 @@ public class WebServerApplication {
 	
 	@Bean
 	public WebRegistrationsController registrationsController() {
-		return new WebRegistrationsController(registrationsService());
+		return new WebRegistrationsController(registrationsService(),usersService());
 	}
 	
 	@Bean
