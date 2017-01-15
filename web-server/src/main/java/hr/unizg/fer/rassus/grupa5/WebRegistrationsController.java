@@ -77,7 +77,7 @@ public class WebRegistrationsController {
 		//System.out.println("imam login "+reg.getUsername());
 		session.setAttribute("loggedInUser", reg);
 		//session.get
-		System.out.println(session.getAttribute("myName"));
+		//System.out.println(session.getAttribute("myName"));
 		return "home";
 		
 	}

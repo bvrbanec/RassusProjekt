@@ -63,10 +63,30 @@ public class WebUsersController {
 //		User user = usersService.findById(id);
 		Registration reg = (Registration) session.getAttribute("loggedInUser");
 		User user = usersService.findById(reg.getPersonId());
-		model.addAttribute("formUser", user != null ? user : new User());//, user != null ? user : new User());
+		model.addAttribute("formUser", user != null ? user : new User());
 		return "my-user";
 	}
 	
+	@RequestMapping(path = "/profile", method = RequestMethod.POST)
+	public String saveUserProfile(Model model, @ModelAttribute User user){
+		User formUser = usersService.saveUser(user);
+		model.addAttribute("formUser", formUser != null ? formUser : new User());
+		return "my-user";
+		
+	}
 	
+	@RequestMapping(path = "/walkers", method = RequestMethod.GET)
+	public String walkers(HttpSession session, Model model){
+		List<User> walkers = usersService.getAllWalkers();
+		model.addAttribute("walkers", walkers);
+		return "users-walkers";
+	}
+	
+	@RequestMapping(path = "/walkers/{id}", method = RequestMethod.GET)
+	public String walkers(HttpSession session, Model model, @PathVariable long id){
+		User user = usersService.findById(id);
+		model.addAttribute("formUser", user);
+		return "walker";
+	}
 	
 }

@@ -130,5 +130,11 @@ public class UserController {
 	public User saveUserAndReturn(@RequestBody User user) {
 		return userService.saveUser(user);
 	}
+	
+	@RequestMapping(path="/walkers", method=RequestMethod.GET,
+			produces = {MediaType.APPLICATION_JSON_VALUE})
+	public List<User> findAllWalkers() {
+		return userService.getAllActiveWalkers();
+	}
 
 }

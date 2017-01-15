@@ -74,5 +74,10 @@ public class UserServiceImpl implements UserService{
 		return deactivateAndGetAll(userRepository.findOne(id));
 	}
 	
+	@Override
+	public List<User> getAllActiveWalkers(){
+		return userRepository.findByWalkerTrueAndActiveTrue();
+	}
+	
 
 }

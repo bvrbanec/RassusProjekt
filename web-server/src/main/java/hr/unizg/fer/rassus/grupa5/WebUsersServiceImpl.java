@@ -1,7 +1,6 @@
 package hr.unizg.fer.rassus.grupa5;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,29 +29,6 @@ public class WebUsersServiceImpl implements WebUsersService{
 	@Override
 	public User findById(long id) {
 		return restTemplate.getForObject(usersServiceUrl + "/{id}", User.class, id);
-	}
-	List<User> users;
-	
-	public List<User> getDummyList(){
-		List<User> list = new ArrayList<>();
-		for (int i = 0; i < 4; ++i) {
-			User user = new User();
-			user.setId(Long.valueOf(i));
-			user.setFirstName("Probnoime");
-			user.setLastName("probnoprezime");
-			user.setUsername("korisnickoime");
-			user.setActive(true);
-			user.setEmail("mail");
-			user.setTelephoneNumber("tel");
-			user.setWalker(true);
-			list.add(user);
-		}
-		users = list;
-		return list;
-	}
-	
-	public User getById(long id){
-		return users.get((int) id);
 	}
 	
 	@Override
@@ -92,6 +68,15 @@ public class WebUsersServiceImpl implements WebUsersService{
 		
 	}
 	
-	
+	@Override
+	public List<User> getAllWalkers() {
+		ResponseEntity<List<User>> usersResponse =
+		        restTemplate.exchange(usersServiceUrl + "/walkers",
+		                    HttpMethod.GET, null, new ParameterizedTypeReference<List<User>>() {
+		            });
+
+		List<User> users = usersResponse.getBody();;
+		return users;
+	}
 
 }
