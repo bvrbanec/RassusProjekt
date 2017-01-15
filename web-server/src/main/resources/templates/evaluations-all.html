@@ -1,0 +1,33 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+
+<body>
+	<h1>Evaluations</h1>
+
+	<div th:if="${evaluations}">
+		
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>WalkerId</th>
+					<th>DogId</th>
+					<th>Comment</th>
+					<th>Rating</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<tr th:each="evaluation : ${evaluations}">
+					<td th:text="|${evaluation.walkerId}|"></td>
+					
+				</tr> 
+			</tbody>
+		</table>
+	</div>
+<div th:replace="footer :: copy"></div>
+ 
+</body>
+</html>

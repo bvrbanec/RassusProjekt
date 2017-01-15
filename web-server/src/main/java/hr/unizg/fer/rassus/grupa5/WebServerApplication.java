@@ -20,7 +20,7 @@ public class WebServerApplication {
 	public static final String HOME_SERVICE_URL = "http://";
 	public static final String REGISTRATIONS_SERVICE_URL = "http://REGISTRATIONS-SERVICE/registrations";
 	public static final String USERS_SERVICE_URL = "http://USERS-SERVICE/users";
-	
+	public static final String EVALUATIONS_SERVICE_URL = "http://EVALUATIONS-SERVICE/evaluations";
 
 	/**
 	 * Run the application using Spring Boot and an embedded servlet engine.
@@ -74,6 +74,10 @@ public class WebServerApplication {
 		return new WebUsersServiceImpl(USERS_SERVICE_URL);
 	}
 
+	@Bean
+	public WebEvaluationsService evService() {
+		return new WebEvaluationsService(EVALUATIONS_SERVICE_URL);
+	}
 	/**
 	 * Create the controller, passing it the {@link WebWalksService} to use.
 	 * 
@@ -102,6 +106,10 @@ public class WebServerApplication {
 	@Bean
 	public WebUsersController usersController() {
 		return new WebUsersController(usersService());
+	}
+	@Bean
+	public WebEvaluationsController evsController() {
+		return new WebEvaluationsController(evService());
 	}
 
 }
