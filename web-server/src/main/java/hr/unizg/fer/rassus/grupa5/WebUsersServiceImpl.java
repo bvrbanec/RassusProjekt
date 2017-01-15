@@ -1,7 +1,6 @@
 package hr.unizg.fer.rassus.grupa5;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +91,15 @@ public class WebUsersServiceImpl implements WebUsersService{
 		
 	}
 	
-	
+	@Override
+	public List<User> getAllWalkers() {
+		ResponseEntity<List<User>> usersResponse =
+		        restTemplate.exchange(usersServiceUrl + "/walkers",
+		                    HttpMethod.GET, null, new ParameterizedTypeReference<List<User>>() {
+		            });
+
+		List<User> users = usersResponse.getBody();;
+		return users;
+	}
 
 }

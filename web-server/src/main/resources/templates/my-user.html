@@ -9,25 +9,16 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<!-- <script>
-		function editClicked(value) {
-			location.href = "/users/select/" + value;
-		}
-		
-		function deleteClicked(value) {
-			location.href = "/users/delete/" + value;
-		}
-	</script> -->
 	<div class="container-fluid">
 	<div class="col-xs-24 col-md-9">
 	<h1>Form</h1>
-	<form action="#" th:action="@{/profile}" th:object="${formUser}"
+	<form action="#" th:action="@{/users/profile}" th:object="${formUser}"
 		method="post">
 		<div class="form-group">
 			Id: <input type="text" th:field="*{id}" readonly="readonly" />
 		</div>
 		<div class="form-group">
-			Username: <input type="text" th:field="*{username}" />
+			Username: <input type="text" th:field="*{username}" readonly="readonly"/>
 		</div>
 		<div class="form-group">
 			First name: <input type="text" th:field="*{firstName}" />
@@ -37,7 +28,7 @@
 			Last name: <input type="text" th:field="*{lastName}" />
 		</div>
 		<div class="form-group">
-			E-mail: <input type="text" th:field="*{email}" />
+			E-mail: <input type="text" th:field="*{email}" readonly="readonly"/>
 		</div>
 		<div class="form-group">
 			Telephone number: <input type="text" th:field="*{telephoneNumber}" />

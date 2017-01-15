@@ -15,4 +15,6 @@ public interface WebUsersService {
 
 	User saveUser(User user);
 
+	List<User> getAllWalkers();
+
 }
