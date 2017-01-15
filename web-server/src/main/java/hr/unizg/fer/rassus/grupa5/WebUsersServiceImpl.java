@@ -30,29 +30,6 @@ public class WebUsersServiceImpl implements WebUsersService{
 	public User findById(long id) {
 		return restTemplate.getForObject(usersServiceUrl + "/{id}", User.class, id);
 	}
-	List<User> users;
-	
-	public List<User> getDummyList(){
-		List<User> list = new ArrayList<>();
-		for (int i = 0; i < 4; ++i) {
-			User user = new User();
-			user.setId(Long.valueOf(i));
-			user.setFirstName("Probnoime");
-			user.setLastName("probnoprezime");
-			user.setUsername("korisnickoime");
-			user.setActive(true);
-			user.setEmail("mail");
-			user.setTelephoneNumber("tel");
-			user.setWalker(true);
-			list.add(user);
-		}
-		users = list;
-		return list;
-	}
-	
-	public User getById(long id){
-		return users.get((int) id);
-	}
 	
 	@Override
 	public List<User> getAll() {

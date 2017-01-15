@@ -82,4 +82,11 @@ public class WebUsersController {
 		return "users-walkers";
 	}
 	
+	@RequestMapping(path = "/walkers/{id}", method = RequestMethod.GET)
+	public String walkers(HttpSession session, Model model, @PathVariable long id){
+		User user = usersService.findById(id);
+		model.addAttribute("formUser", user);
+		return "walker";
+	}
+	
 }
