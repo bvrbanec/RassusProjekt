@@ -5,8 +5,11 @@
 <head th:substituteby="header :: copy"></head>
 
 <body>
-	<h1>Get in touch with </h1>
-	<label>Owner name</label>
+	<h3>Get in touch with <span th:text="${owner.firstName}"></span></h3>
+	
+	<p>Email: <span th:text="${owner.email}"></span></p>
+	
+	<p  th:if="${owner.telephoneNumber}">Phone: <span th:text="${owner.telephoneNumber}"></span></p>
 
 	<div th:substituteby="footer :: copy"></div>
 

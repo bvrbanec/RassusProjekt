@@ -21,10 +21,12 @@ public class WebWalksController {
 	@Autowired
 	protected WebWalksService walksService;
 	protected WebDogsService dogsService;
+	protected WebUsersService usersService;
 
-	public WebWalksController(WebWalksService walksService, WebDogsService dogsService) {
+	public WebWalksController(WebWalksService walksService, WebDogsService dogsService, WebUsersService usersService) {
 		this.walksService = walksService;
 		this.dogsService = dogsService;
+		this.usersService = usersService;
 	}
 
 	@RequestMapping("/dog/{dogId}")
@@ -33,8 +35,11 @@ public class WebWalksController {
 		walks = walksService.findByDogId(dogId);
 		// String dogName = dogsService.findDogNameById(dogId);
 		for (Walk walk : walks) {
-			if (walk.getWalkerId() != null)
-				walk.setWalkerName("Tomo Tomina");
+			if (walk.getWalkerId() != null) {
+				User user = usersService.findById(walk.getWalkerId());
+				String name = user.getFirstName() + " " + user.getLastName();
+				walk.setWalkerName(name);
+			}
 		}
 		model.addAttribute("dogWalks", walks);
 		// model.addAttribute("dogName", dogName);
@@ -48,10 +53,14 @@ public class WebWalksController {
 		walks = walksService.findByWalkerId(walkerId);
 		for (Walk walk : walks) {
 			walk.setDogName("Bonzi");
-			walk.setOwnerName("Simon Sayes");
+			User user = usersService.findById(walk.getOwnerId());
+			String name = user.getFirstName() + " " + user.getLastName();
+			walk.setOwnerName(name);
 		}
 		model.addAttribute("walkerWalks", walks);
-		model.addAttribute("walkerName", "Tomo Tomina");
+		User user = usersService.findById(walkerId);
+		String name = user.getFirstName() + " " + user.getLastName();
+		model.addAttribute("walkerName", name);
 		return "walker-walks";
 	}
 
@@ -61,11 +70,17 @@ public class WebWalksController {
 		walks = walksService.findByOwnerId(ownerId);
 		for (Walk walk : walks) {
 			walk.setDogName("Bonzi");
-			if (walk.getWalkerId() != null)
-				walk.setWalkerName("Tomo Tomina");
+			if (walk.getWalkerId() != null) {
+				User user = usersService.findById(walk.getWalkerId());
+				String name = user.getFirstName() + " " + user.getLastName();
+				walk.setWalkerName(name);
+			}
+				
 		}
 		model.addAttribute("ownerWalks", walks);
-		model.addAttribute("ownerName", "Simon Sayes");
+		User user = usersService.findById(ownerId);
+		String name = user.getFirstName() + " " + user.getLastName();
+		model.addAttribute("ownerName", name);
 		return "owner-walks";
 	}
 
@@ -76,9 +91,11 @@ public class WebWalksController {
 		for (Walk walk : walks) {
 			// walk.setDogName(dogsService.findDogNameById(walk.getDogId()));
 			walk.setDogName("Bonzi");
-			walk.setOwnerName("Vladimir"); // Isto tako dohvatiti ime vlasnika
-											// za owner ID -
-											// webPeopleService.findNameById(ownerId)
+			
+			User user = usersService.findById(walk.getOwnerId());
+			String name = user.getFirstName() + " " + user.getLastName();
+			walk.setOwnerName(name);
+			
 		}
 		model.addAttribute("activeWalks", walks);
 		return "active-walks";
@@ -118,8 +135,10 @@ public class WebWalksController {
 			walk = walksService.acceptOffer(walk);
 			// Person owner = peopleService.getById(walk.ownerId);
 			// model.addAttribute(owner);
-			String ownerName = "Vladimir";
-			model.addAttribute(ownerName);
+			
+			User user = usersService.findById(walk.getOwnerId());
+			
+			model.addAttribute("owner", user);
 			return "owner-connect";
 		} else
 			return "error";
