@@ -22,18 +22,20 @@ public class WebWalksController {
 	protected WebWalksService walksService;
 	protected WebDogsService dogsService;
 	protected WebUsersService usersService;
+	protected WebEvaluationsService evalService;
 
-	public WebWalksController(WebWalksService walksService, WebDogsService dogsService, WebUsersService usersService) {
+	public WebWalksController(WebWalksService walksService, WebDogsService dogsService, WebUsersService usersService, WebEvaluationsService evalService) {
 		this.walksService = walksService;
 		this.dogsService = dogsService;
 		this.usersService = usersService;
+		this.evalService = evalService;
 	}
 
 	@RequestMapping("/dog/{dogId}")
 	public String byDog(Model model, @PathVariable("dogId") Long dogId) {
 		List<Walk> walks = new ArrayList<Walk>();
 		walks = walksService.findByDogId(dogId);
-		// String dogName = dogsService.findDogNameById(dogId);
+		Dog dog = dogsService.findById(dogId);
 		for (Walk walk : walks) {
 			if (walk.getWalkerId() != null) {
 				User user = usersService.findById(walk.getWalkerId());
@@ -42,8 +44,7 @@ public class WebWalksController {
 			}
 		}
 		model.addAttribute("dogWalks", walks);
-		// model.addAttribute("dogName", dogName);
-		model.addAttribute("dogName", "Bonzi");
+		model.addAttribute("dogName", dog.getName());
 		return "dog-walks";
 	}
 
@@ -52,7 +53,8 @@ public class WebWalksController {
 		List<Walk> walks = new ArrayList<Walk>();
 		walks = walksService.findByWalkerId(walkerId);
 		for (Walk walk : walks) {
-			walk.setDogName("Bonzi");
+			Dog dog = dogsService.findById(walk.getDogId());
+			walk.setDogName(dog.getName());
 			User user = usersService.findById(walk.getOwnerId());
 			String name = user.getFirstName() + " " + user.getLastName();
 			walk.setOwnerName(name);
@@ -102,13 +104,10 @@ public class WebWalksController {
 	}
 
 	@RequestMapping(value = "/offer", method = RequestMethod.GET)
-	public String newOffer(Model model) {
-		// List<Dog> dogs = dogsService.findByOwner(dogOwner);
-		ArrayList<Dog> dogs = new ArrayList<Dog>();
-		Dog dog = new Dog();
-		dog.setId((long) 1);
-		dog.setName("Mongo");
-		dogs.add(dog);
+	public String newOffer(Model model, HttpSession session) {
+		Registration reg = (Registration) session.getAttribute("loggedInUser");
+		Long ownerId = reg.getPersonId();
+		List<Dog> dogs = dogsService.findByOwnerId(ownerId);
 
 		model.addAttribute("walk", new Walk());
 		model.addAttribute("dogs", dogs);
@@ -135,7 +134,11 @@ public class WebWalksController {
 			walk = walksService.acceptOffer(walk);
 			// Person owner = peopleService.getById(walk.ownerId);
 			// model.addAttribute(owner);
-			
+			Evaluation eval = new Evaluation();
+			eval.setDogId(walk.getDogId());
+			eval.setOwnerId(walk.getOwnerId());
+			eval.setWalkerId(walkerId);
+			evalService.save(eval);
 			User user = usersService.findById(walk.getOwnerId());
 			
 			model.addAttribute("owner", user);

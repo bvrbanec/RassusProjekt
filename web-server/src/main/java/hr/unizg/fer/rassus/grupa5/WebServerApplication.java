@@ -85,7 +85,7 @@ public class WebServerApplication {
 	 */
 	@Bean
 	public WebWalksController walksController() {
-		return new WebWalksController(walksService(), dogsService(), usersService());
+		return new WebWalksController(walksService(), dogsService(), usersService(), evService());
 	}
 	
 	@Bean

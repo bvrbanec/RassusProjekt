@@ -6,14 +6,13 @@
 
 <body>
 	<h1>Evaluation of dog</h1>
- 	<!-- <a href="mailto:someone@example.com?Subject=Walk" target="_top">Send Mail</a> -->
+	<!-- <a href="mailto:someone@example.com?Subject=Walk" target="_top">Send Mail</a> -->
 	<form action="#" th:object="${dogEvaluation}" method="POST"
 		th:action="@{/evaluations/addEvOfDog}" class="form-horizontal">
- 
-Eval dog id:
-<span th:text="${dogEvaluation.dogId}"></span>
+
+		<input type="hidden" th:value="${dogId}" th:attr="name='dogId'" />
 		<div class="form-group">
-		
+
 			<label for="dogComment" class="control-label col-xs-2">Comment</label>
 			<div class="col-xs-2">
 				<input type="text" class="form-control" id="dogComment"
@@ -21,45 +20,46 @@ Eval dog id:
 					style="width: 30em;" />
 			</div>
 			<div class="col-xs-8"></div>
-			 
+
 		</div>
 		<div class="form-group">
-		
-			<label for="dogRating" class="control-label col-xs-2">Rate dog based on it's behaviour</label>
+
+			<label for="dogRating" class="control-label col-xs-2">Rate
+				dog based on it's behaviour</label>
 			<div class="col-xs-2">
 				<div class="form-group">
-				<input type="radio" th:field="*{dogRating}" th:value="1" />
-				<label for="dogRating" class="control-label col-xs-2">1</label>
+					<input type="radio" th:field="*{dogRating}" th:value="1" /> <label
+						for="dogRating" class="control-label col-xs-2">1</label>
 				</div>
 				<div class="form-group">
-				<label for="dogRating" class="control-label col-xs-2">2</label>
-			    <input type="radio" th:field="*{dogRating}" th:value="2" />
-			    </div>
+					<label for="dogRating" class="control-label col-xs-2">2</label> <input
+						type="radio" th:field="*{dogRating}" th:value="2" />
+				</div>
 				<div class="form-group">
-				<label for="dogRating" class="control-label col-xs-2">3</label>
-			    <input type="radio" th:field="*{dogRating}" th:value="3" />
-			    </div>
-			    <div class="form-group">
-				<label for="dogRating" class="control-label col-xs-2">4</label>
-			    <input type="radio" th:field="*{dogRating}" th:value="4" />
-			    </div>
-			    <div class="form-group">
-				<label for="dogRating" class="control-label col-xs-2">5</label>
-			    <input type="radio" th:field="*{dogRating}" th:value="5" />
-			    </div>
-				
-				
-			<div class="col-xs-8"></div>
-			 
-		</div>
-		<div class="form-group">
-			<div class="col-xs-offset-2 col-xs-10">
-				<button type="submit" class="btn btn-primary">Komentiraj</button>
+					<label for="dogRating" class="control-label col-xs-2">3</label> <input
+						type="radio" th:field="*{dogRating}" th:value="3" />
+				</div>
+				<div class="form-group">
+					<label for="dogRating" class="control-label col-xs-2">4</label> <input
+						type="radio" th:field="*{dogRating}" th:value="4" />
+				</div>
+				<div class="form-group">
+					<label for="dogRating" class="control-label col-xs-2">5</label> <input
+						type="radio" th:field="*{dogRating}" th:value="5" />
+				</div>
+
+
+				<div class="col-xs-8"></div>
+
+			</div>
+			<div class="form-group">
+				<div class="col-xs-offset-2 col-xs-10">
+					<button type="submit" class="btn btn-primary">Komentiraj</button>
+				</div>
 			</div>
 		</div>
-		</div>
-	</form>		
-	
+	</form>
+
 	<div th:replace="footer :: copy"></div>
 
 </body>

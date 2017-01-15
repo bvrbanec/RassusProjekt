@@ -10,6 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -57,19 +59,20 @@ public class WebEvaluationsController {
 		System.out.println(reg.getPersonId());
 		Evaluation eval = evalsService.checkExisting(reg.getPersonId(), dogId);
 		if (eval == null) {
-			eval = new Evaluation();
-			//return "redirect:/evaluations/all";
+			return "redirect:/evaluations/all";
 		}
 
 		model.addAttribute("dogEvaluation", eval);
+		model.addAttribute("dogId", dogId);
 		return "add-evaluation";
 	}
 
 	@RequestMapping(value = "/addEvOfDog", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String postDogReview(Evaluation dogEvaluation, HttpSession session) {
+	public String postDogReview(@RequestParam("dogId") Long dogId, Evaluation dogEvaluation, HttpSession session) {
 		Registration reg = (Registration) session.getAttribute("loggedInUser");
 		Long walkerId = reg.getPersonId();
 
+		System.out.println("dog id u post dog rev je " + dogId);
 		Evaluation oldEval = evalsService.checkExisting(walkerId, dogEvaluation.getDogId());
 		oldEval.setDogComment(dogEvaluation.getDogComment());
 		oldEval.setDogRating(dogEvaluation.getDogRating());
