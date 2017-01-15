@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="header :: copy"></head>
+<head th:replace="header :: copy">
+</head>
+
 <body>
 	<h1>Create offer</h1>
 
@@ -12,7 +14,7 @@
 		<div class="form-group">
 			<label for="distance" class="control-label col-xs-2">Dog:</label>
 			<div class="col-xs-2">
-				<select th:field="*{dogId}">
+				<select class="dropdown" th:field="*{dogId}">
 					<option th:each="dog : ${dogs}" th:value="${dog.id}"
 						th:text="${dog.name}"></option>
 				</select>
