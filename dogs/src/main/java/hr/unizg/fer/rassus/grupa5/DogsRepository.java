@@ -18,6 +18,8 @@ public interface DogsRepository extends CrudRepository<Dog, Long> {
 
 	List<Dog> findByWeight(Double dogWeight);
 	
+	List<Dog> findAll();
+	
 	String findNameById(Long Id);
 	
 }

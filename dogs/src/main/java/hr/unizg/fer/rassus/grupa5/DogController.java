@@ -4,10 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+
 
 
 
@@ -23,28 +26,28 @@ public class DogController {
 		this.dogsRepository = dogsRepository;
 	}
 	
-	@RequestMapping("/nameById/{Id}")
-	public String NamebyId(@PathVariable("Id") Long Id){
+	@RequestMapping("/nameById/{id}")
+	public String NamebyId(@PathVariable("id") Long Id){
 		return dogsRepository.findNameById(Id);
 	}
 	
-	@RequestMapping("/dog/{Id}")
-	public List<Dog> byId(@PathVariable("Id") Long Id) {
+	@RequestMapping("/{id}")
+	public List<Dog> byId(@PathVariable("id") Long Id) {
 		return dogsRepository.findById(Id);
 	}
 	
-	@RequestMapping("/owner/{dogOwner}")
-	public List<Dog> byOwner(@PathVariable("dogOwner") String dogOwner) {
+	@RequestMapping("/owner/{owner}")
+	public List<Dog> byOwner(@PathVariable("owner") String dogOwner) {
 		return dogsRepository.findByOwner(dogOwner);
 	}
 	
-	@RequestMapping("/breed/{dogBreed}")
-	public List<Dog> byBreed(@PathVariable("dogBreed") String dogBreed) {
+	@RequestMapping("/breed/{breed}")
+	public List<Dog> byBreed(@PathVariable("breed") String dogBreed) {
 		return dogsRepository.findByBreed(dogBreed);
 	}
 	
-	@RequestMapping("/gender/{dogGender}")
-	public List<Dog> byGender(@PathVariable("dogGender") String dogGender) {
+	@RequestMapping("/gender/{gender}")
+	public List<Dog> byGender(@PathVariable("gender") String dogGender) {
 		return dogsRepository.findByGender(dogGender);
 	}
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -57,6 +60,20 @@ public class DogController {
 	    catch (Exception ex) {
 	      return null;
 	    }
+	  }
+	
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	@ResponseBody
+	 public Dog createRegistration(@RequestBody Dog dog){
+	    
+	    Dog reg;
+	    try { 
+	      reg = dogsRepository.save(new Dog(dog));
+	    }
+	    catch (Exception ex) {
+	      return null;
+	    }
+	    return reg;
 	  }
 	
 	

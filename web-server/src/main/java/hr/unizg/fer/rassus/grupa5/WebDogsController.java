@@ -22,18 +22,18 @@ public class WebDogsController {
 		this.dogsService = dogsService;
 	}
 	
-	@RequestMapping(value = "/allDogs", method = RequestMethod.GET)
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public String getall(Model model) {
 		List<Dog> registrations = new ArrayList<Dog>();
 		registrations = dogsService.getall();
-		model.addAttribute("dogList", registrations);
+		model.addAttribute("dog", registrations);
 		return "dogs-all";
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String register(Model model) {
-		model.addAttribute("dogsList", new Dog());
-		return "dog-list";
+		model.addAttribute("dog", new Dog());
+		return "dog-registration";
 	}
 	
 	@RequestMapping(value = "/register", method = RequestMethod.POST,
@@ -43,31 +43,31 @@ public class WebDogsController {
 		return dogsService.register(registration);
 	}
 	
-	@RequestMapping("/{DogNameById}")
-	public String byDogNamebyId(Model model, @PathVariable("dogId") Long Id){
+	@RequestMapping("/nameById/{id}")
+	public String byDogNamebyId(Model model, @PathVariable("id") Long Id){
 		Dog dog = new Dog();
 		dog = (Dog) dogsService.findById(Id);
 		String dogName = dog.getName();
-		model.addAttribute("dogList", dogName);
-		return "dog-list";
+		model.addAttribute("dog", dogName);
+		return "dogs-all";
 		
 	}
 
-	@RequestMapping("/{dogId}")
-	public String byDogId(Model model, @PathVariable("dogId") Long Id){
+	@RequestMapping("/{id}")
+	public String byDogId(Model model, @PathVariable("id") Long Id){
 		List<Dog> dogs = new ArrayList<Dog>();
 		dogs = dogsService.findById(Id);
-		model.addAttribute("dogList", dogs);
-		return "dog-list";
+		model.addAttribute("dog", dogs);
+		return "dogs-all";
 		
 	}
 	
-	@RequestMapping("/{dogOwner}")
-	public String byOwner(Model model,@PathVariable("dogOwner") String dogOwner) {
+	@RequestMapping("owner/{owner}")
+	public String byOwner(Model model,@PathVariable("owner") String dogOwner) {
 		List<Dog> dogs = new ArrayList<Dog>();
 		dogs = dogsService.findByOwner(dogOwner);
-		model.addAttribute("dogList", dogs);
-		return "dog-list";
+		model.addAttribute("dog", dogs);
+		return "dogs-all";
 	}
-	
+
 }

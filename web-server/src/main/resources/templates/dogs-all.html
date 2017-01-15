@@ -7,7 +7,7 @@
 <body>
 	<h1>Registered dogs</h1>
 
-	<div th:if="${dogList}">
+	<div th:if="${dog}">
 		
 		<table class="table table-striped">
 			<thead>
@@ -27,18 +27,18 @@
 			</thead>
 
 			<tbody>
-				<tr th:each="dog : ${dogList}">
-					<td th:text="|${dog.dogName}|"></td>
-					<td th:text="${dog.dogBreed}"></td>
-					<td th:text="${dog.dogOwner}"></td>
-					<td th:text="${dog.dogAge}"></td>
-					<td th:text="${dog.dogGender}"></td>
-					<td th:text="${dog.dogHealthCondition}"></td>
-					<td th:text="${dog.dogHairColor}"></td>
-					<td th:text="${dog.dogEyeColor}"></td>
-					<td th:text="${dog.dogWeight}"></td>
-					<td th:text="${dog.dogHeight}"></td>
-					<td th:text="${dog.dogHairLength}"></td>
+				<tr th:each="dog : ${dog}">
+					<td th:text="|${dog.name}|"></td>
+					<td th:text="${dog.breed}"></td>
+					<td th:text="${dog.owner}"></td>
+					<td th:text="${dog.age}"></td>
+					<td th:text="${dog.gender}"></td>
+					<td th:text="${dog.health}"></td>
+					<td th:text="${dog.hairColour}"></td>
+					<td th:text="${dog.eyeColour}"></td>
+					<td th:text="${dog.weight}"></td>
+					<td th:text="${dog.height}"></td>
+					<td th:text="${dog.hairLength}"></td>
 				</tr> 
 			</tbody>
 		</table>

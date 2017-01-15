@@ -27,9 +27,51 @@ public class Dog {
 	private String hairLength;
 	
 	
-	public Dog(){
-		
+public Dog(){} //constructor for JPA
+	
+	
+	
+	public Dog(String name, String breed, String owner, Double age, String gender, String health,
+			String hairColour, String eyeColour, Double weight, Double height, String hairLength) {
+		super();
+		this.name = name;
+		this.breed = breed;
+		this.owner = owner;
+		this.age = age;
+		this.gender = gender;
+		this.health = health;
+		this.hairColour = hairColour;
+		this.eyeColour = eyeColour;
+		this.weight = weight;
+		this.height = height;
+		this.hairLength = hairLength;
 	}
+	
+	public Dog(Dog reg){
+		this.name = reg.name;
+		this.breed = reg.breed;
+		this.owner = reg.owner;
+		this.age = reg.age;
+		this.gender = reg.gender;
+		this.health = reg.health;
+		this.hairColour = reg.hairColour;
+		this.eyeColour = reg.eyeColour;
+		this.weight = reg.weight;
+		this.height = reg.height;
+		this.hairLength = reg.hairLength;
+	}
+
+
+
+	@Override
+	public String toString() {
+		return "Dog [id=" + id + ", name=" + name + ", breed=" + breed + ", owner=" + owner + ", age=" + age
+				+ ", gender=" + gender + ", health=" + health + ", hairColour=" + hairColour + ", eyeColour="
+				+ eyeColour + ", weight=" + weight + ", height=" + height + ", hairLength=" + hairLength + "]";
+	}
+
+
+
 	public Long getId() {
 		return id;
 	}
