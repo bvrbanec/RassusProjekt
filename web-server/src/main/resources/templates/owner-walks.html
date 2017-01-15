@@ -37,7 +37,7 @@
 					
 					<td  th:if="!${walk.walkerId}"><input type="hidden" th:value="${walk.id}"
 						th:attr="name='id'" />
-						<button type="submit">Accept</button></td>
+						<button type="submit" class="btn btn-primary">Accept</button></td>
    					<td  th:if="${walk.walkerId}" th:text="${walk.walkerName}"></td>
 					</form>
 				</tr>
