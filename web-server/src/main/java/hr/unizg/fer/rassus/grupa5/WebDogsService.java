@@ -46,25 +46,25 @@ public class WebDogsService {
 		return "dogs-all";
 	}
 	
-	String findNameById(Long id){
+	/*String findNameById(Long id){
 		Dog dog = null;
 		dog = restTemplate.getForObject(dogsServiceUrl + "/nameById/{id}", Dog.class, id);
 		String dogName = dog.getName();
 		return dogName;
-	}
+	}*/
 
-	List<Dog> findById(Long id) {
-		Dog[] dogs = null;
-		dogs = restTemplate.getForObject(dogsServiceUrl + "/{id}", Dog[].class, id);
-		if (dogs == null || dogs.length == 0)
+	Dog findById(Long id) {
+		Dog dog = null;
+		dog = restTemplate.getForObject(dogsServiceUrl + "/{id}", Dog.class, id);
+		if (dog == null)
 			return null;
 		else
-			return Arrays.asList(dogs);
+			return dog;
 	}
 
-	List<Dog> findByOwner(String owner) {
+	List<Dog> findByOwnerId(Long ownerId) {
 		Dog[] dogs = null;
-		dogs = restTemplate.getForObject(dogsServiceUrl + "/owner/{owner}", Dog[].class, owner);
+		dogs = restTemplate.getForObject(dogsServiceUrl + "/owner/{owner}", Dog[].class, ownerId);
 		if (dogs == null || dogs.length == 0)
 			return null;
 		else

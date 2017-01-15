@@ -8,7 +8,10 @@
 	
 	<form action="#" th:object="${dog}" method="POST"
 		th:action="@{/dogs/register}" class="form-horizontal">
- 
+ 		
+ 		<div class="form-group">
+
+		</div>
 		
 		<div class="form-group">
 		
@@ -21,6 +24,7 @@
 			<div class="col-xs-8"></div>
 			
 		</div>
+		
 		<div class="form-group">
 		
 			<label for="breed" class="control-label col-xs-2">Breed:</label>
@@ -32,17 +36,7 @@
 			<div class="col-xs-8"></div>
 			
 		</div>
-		<div class="form-group">
 		
-			<label for="owner" class="control-label col-xs-2">Dog owner:</label>
-			<div class="col-xs-2">
-				<input type="text" class="form-control" id="owner"
-					th:field="*{owner}" placeholder="Enter name and surname of the dog owner"
-					style="width: 30em;" />
-			</div>
-			<div class="col-xs-8"></div>
-			
-		</div>
 		<div class="form-group">
 		
 			<label for="age" class="control-label col-xs-2">Age:</label>
@@ -58,9 +52,10 @@
 		
 			<label for="gender" class="control-label col-xs-2">Gender:</label>
 			<div class="col-xs-2">
-					<input type="text" class="form-control" id="gender"
-					th:field="*{gender}" placeholder="Enter female/male"
-					style="width: 30em;" />
+				<select th:field="*{gender}"> 
+				<option th:value="male">male</option>
+				<option th:value="female">female</option>
+				</select>
 			</div>
 			<div class="col-xs-8"></div>
 			
@@ -124,10 +119,12 @@
 		
 			<label for="hairLength" class="control-label col-xs-2">Hair length:</label>
 			<div class="col-xs-2">
-				<input type="text" class="form-control" id="hairLength"
-					th:field="*{hairLength}" placeholder="Enter long/medium/short/no hair"
-					style="width: 30em;" />
-					
+				<select th:field="*{hairLength}"> 
+				<option th:value="short">short</option>
+				<option th:value="medium">medium</option>
+				<option th:value="long">long</option>
+				<option th:value="noHair">no hair</option>
+				</select>
 			</div>
 			<div class="col-xs-8"></div>
 			

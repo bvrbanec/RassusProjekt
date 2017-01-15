@@ -5,22 +5,20 @@
 <head th:replace="header :: copy"></head>
 
 <body>
-	<h1>Registered dogs</h1>
-	
+
 	<script>
 		function Clicked(value) {
 			location.href = "/dogs/" + value;
 		}
 	</script>
 
-	<div th:if="${dog}">
+	<div th:if="${ownerDogs}">
 		
 		<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>Name of the dog</th>
 					<th>Breed</th>
-					<th>Owner</th>
 					<th>Age</th>
 					<th>Gender</th>
 					<th>Health condition</th>
@@ -33,10 +31,9 @@
 			</thead>
 
 			<tbody>
-				<tr th:each="dog : ${dog}">
+				<tr th:each="dog : ${ownerDogs}">
 					<td th:text="|${dog.name}|"></td>
 					<td th:text="${dog.breed}"></td>
-					<td th:text="${session.loggedInUser.username}"></td>
 					<td th:text="${dog.age}"></td>
 					<td th:text="${dog.gender}"></td>
 					<td th:text="${dog.health}"></td>

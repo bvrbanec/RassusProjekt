@@ -5,15 +5,8 @@
 <head th:replace="header :: copy"></head>
 
 <body>
-	<h1>Registered dogs</h1>
-	
-	<script>
-		function Clicked(value) {
-			location.href = "/dogs/" + value;
-		}
-	</script>
 
-	<div th:if="${dog}">
+	<div th:if="${dogId}">
 		
 		<table class="table table-striped">
 			<thead>
@@ -33,7 +26,7 @@
 			</thead>
 
 			<tbody>
-				<tr th:each="dog : ${dog}">
+				<tr th:each="dog : ${dogId}">
 					<td th:text="|${dog.name}|"></td>
 					<td th:text="${dog.breed}"></td>
 					<td th:text="${session.loggedInUser.username}"></td>
@@ -45,8 +38,6 @@
 					<td th:text="${dog.weight}"></td>
 					<td th:text="${dog.height}"></td>
 					<td th:text="${dog.hairLength}"></td>
-					<td><button class="btn btn-primary"
-						th:onclick="'javascript:Clicked(\'' + ${dog.id} + '\');'">Details</button></td> 
 				</tr> 
 			</tbody>
 		</table>
