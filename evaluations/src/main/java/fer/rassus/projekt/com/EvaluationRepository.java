@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
+public interface EvaluationRepository extends CrudRepository<Evaluation, Long> {
+	List<Evaluation> findByOwnerId(Long ownerId);
 
+	List<Evaluation> findByDogId(Long dogId);
 
-public interface EvaluationRepository extends CrudRepository<Evaluation, Long>{
+	List<Evaluation> findByWalkerId(Long walkerId);
 
-	
-	List<Evaluation> findByownerId(Long ownerId);
-	List<Evaluation> findBydogId(Long dogId);
-	List<Evaluation> findBywalkerId(Long walkerId);
+	Evaluation findByWalkerIdAndDogId(Long walkerId, Long dogId);
+
 	List<Evaluation> findAll();
 }

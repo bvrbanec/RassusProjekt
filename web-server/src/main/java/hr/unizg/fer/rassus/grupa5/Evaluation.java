@@ -1,50 +1,29 @@
 package hr.unizg.fer.rassus.grupa5;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
-
-
-
+@Entity
 public class Evaluation {
 
+	@Id
 	private Long evalId;
 	private Long walkerId;
+	private String walkerName;
 	private Long ownerId;
 	private Long dogId;
-	private String comment;
-	private Long gradeId;
-	private String commentDog;
-	private Long gradeDog;
-	
-	public Evaluation(){
-		
-	}
-	
-	public Evaluation(Evaluation eval) {
-		super();
-		this.gradeId=eval.gradeId;
-		this.ownerId = eval.ownerId;
-		this.walkerId=eval.walkerId;
-		this.dogId = eval.dogId;
-		this.comment=eval.comment;
-		this.commentDog=eval.commentDog;
-		this.gradeDog=eval.gradeDog;
+	private String dogName;
+	private String walkerComment;
+	private int walkerRating;
+	private String dogComment;
+	private int dogRating;
+
+	public Long getEvalId() {
+		return evalId;
 	}
 
-
-	public String getCommentDog() {
-		return commentDog;
-	}
-
-	public void setCommentDog(String commentDog) {
-		this.commentDog = commentDog;
-	}
-
-	public Long getGradeDog() {
-		return gradeDog;
-	}
-
-	public void setGradeDog(Long gradeDog) {
-		this.gradeDog = gradeDog;
+	public void setEvalId(Long evalId) {
+		this.evalId = evalId;
 	}
 
 	public Long getWalkerId() {
@@ -63,31 +42,59 @@ public class Evaluation {
 		this.ownerId = ownerId;
 	}
 
-	public Long getEvalId() {
-		return evalId;
-	}
-	public void setEvalId(Long evalId) {
-		this.evalId = evalId;
-	}
-	public Long getGradeId() {
-		return gradeId;
-	}
-	public void setGradeId(Long gradeId) {
-		this.gradeId = gradeId;
-	}
-
-	
 	public Long getDogId() {
 		return dogId;
 	}
+
 	public void setDogId(Long dogId) {
 		this.dogId = dogId;
 	}
-	public String getComment() {
-		return comment;
+
+	public String getWalkerComment() {
+		return walkerComment;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+
+	public void setWalkerComment(String walkerComment) {
+		this.walkerComment = walkerComment;
 	}
-	
+
+	public int getWalkerRating() {
+		return walkerRating;
+	}
+
+	public void setWalkerRating(int walkerRating) {
+		this.walkerRating = walkerRating;
+	}
+
+	public String getDogComment() {
+		return dogComment;
+	}
+
+	public void setDogComment(String dogComment) {
+		this.dogComment = dogComment;
+	}
+
+	public int getDogRating() {
+		return dogRating;
+	}
+
+	public void setDogRating(int dogRating) {
+		this.dogRating = dogRating;
+	}
+
+	public String getWalkerName() {
+		return walkerName;
+	}
+
+	public void setWalkerName(String walkerName) {
+		this.walkerName = walkerName;
+	}
+
+	public String getDogName() {
+		return dogName;
+	}
+
+	public void setDogName(String dogName) {
+		this.dogName = dogName;
+	}
 }
