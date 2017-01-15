@@ -1,0 +1,20 @@
+# Spring properties
+spring:
+  application:
+    name: mobile-service  # Identify this application
+  freemarker:
+    enabled: false     # Ignore Eureka dashboard FreeMarker templates
+    
+# Discovery Server Access
+#  1. Define URL of registration server (defaultZone)
+#  2. Reduce lease-renewal time so processes register more quickly
+eureka:
+  instance:
+     leaseRenewalIntervalInSeconds: 5   # DO NOT DO THIS IN PRODUCTION
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+# HTTP Server
+server:
+  port: 10000   # HTTP (Tomcat) port
