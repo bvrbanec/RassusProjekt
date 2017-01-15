@@ -99,8 +99,9 @@ public class WebWalksController {
 	}
 
 	@RequestMapping(value = "/offer", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String createOffer(Walk walk) {
-		Long ownerId = (long) 1;// get user id from session
+	public String createOffer(Walk walk, HttpSession session) {
+		Registration reg = (Registration) session.getAttribute("loggedInUser");
+		Long ownerId = reg.getPersonId();
 		walk.setOwnerId(ownerId);
 		walksService.offerWalk(walk);
 		return "redirect:/walks/active";
@@ -109,10 +110,9 @@ public class WebWalksController {
 	@RequestMapping(value = "/accept", method = RequestMethod.POST)
 	public String acceptOffer(@RequestParam("id") Long id, Model model, HttpSession session) {
 		Walk walk = walksService.findById(id);
-		Long walkerId = (long) 1; // get currently logged in user
-		// Registration reg = (Registration)
-		// session.getAttribute("loggedInUser");
-		// Long walkerId = reg.getPersonId();
+		// Long walkerId = (long) 1; // get currently logged in user
+		Registration reg = (Registration) session.getAttribute("loggedInUser");
+		Long walkerId = reg.getPersonId();
 		if (walk != null && walk.getWalkerId() == null) {
 			walk.setWalkerId(walkerId);
 			walk = walksService.acceptOffer(walk);
