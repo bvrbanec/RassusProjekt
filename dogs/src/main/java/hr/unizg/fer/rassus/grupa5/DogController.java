@@ -32,13 +32,13 @@ public class DogController {
 	}
 	
 	@RequestMapping("/{id}")
-	public List<Dog> byId(@PathVariable("id") Long Id) {
+	public Dog byId(@PathVariable("id") Long Id) {
 		return dogsRepository.findById(Id);
 	}
 	
-	@RequestMapping("/owner/{owner}")
-	public List<Dog> byOwner(@PathVariable("owner") String dogOwner) {
-		return dogsRepository.findByOwner(dogOwner);
+	@RequestMapping("/owner/{ownerId}")
+	public List<Dog> byOwner(@PathVariable("ownerId") Long dogOwner) {
+		return dogsRepository.findByOwnerId(dogOwner);
 	}
 	
 	@RequestMapping("/breed/{breed}")

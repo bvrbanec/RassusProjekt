@@ -15,8 +15,8 @@ public class Dog {
 	
 	
 	private String name;
+	private Long ownerId;
 	private String breed;
-	private String owner;
 	private Double age;
 	private String gender;
 	private String health;
@@ -31,12 +31,12 @@ public Dog(){} //constructor for JPA
 	
 	
 	
-	public Dog(String name, String breed, String owner, Double age, String gender, String health,
+	public Dog(String name, String breed, Long ownerId, Double age, String gender, String health,
 			String hairColour, String eyeColour, Double weight, Double height, String hairLength) {
 		super();
 		this.name = name;
 		this.breed = breed;
-		this.owner = owner;
+		this.ownerId = ownerId;
 		this.age = age;
 		this.gender = gender;
 		this.health = health;
@@ -50,7 +50,7 @@ public Dog(){} //constructor for JPA
 	public Dog(Dog reg){
 		this.name = reg.name;
 		this.breed = reg.breed;
-		this.owner = reg.owner;
+		this.ownerId = reg.ownerId;
 		this.age = reg.age;
 		this.gender = reg.gender;
 		this.health = reg.health;
@@ -65,7 +65,7 @@ public Dog(){} //constructor for JPA
 
 	@Override
 	public String toString() {
-		return "Dog [id=" + id + ", name=" + name + ", breed=" + breed + ", owner=" + owner + ", age=" + age
+		return "Dog [id=" + id + ", name=" + name + ", breed=" + breed + ", owner=" + ownerId + ", age=" + age
 				+ ", gender=" + gender + ", health=" + health + ", hairColour=" + hairColour + ", eyeColour="
 				+ eyeColour + ", weight=" + weight + ", height=" + height + ", hairLength=" + hairLength + "]";
 	}
@@ -94,11 +94,11 @@ public Dog(){} //constructor for JPA
 		this.breed = breed;
 	}
 	
-	public String getOwner() {
-		return owner;
+	public Long getOwnerId() {
+		return ownerId;
 	}
-	public void setOwner(String owner) {
-		this.owner = owner;
+	public void setOwnerId(Long ownerId) {
+		this.ownerId = ownerId;
 	}
 	public Double getAge() {
 		return age;
