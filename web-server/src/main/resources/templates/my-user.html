@@ -1,51 +1,89 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="header :: copy">
-<title>User profile</title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.3.7/js/tether.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/js/bootstrap.min.js"></script>
-</head>
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="header :: copy"></head>
+<h1>User information</h1>
 <body>
-	<div class="container-fluid">
-	<div class="col-xs-24 col-md-9">
-	<h1>Form</h1>
 	<form action="#" th:action="@{/users/profile}" th:object="${formUser}"
-		method="post">
+		method="post" class="form-horizontal">
+		
 		<div class="form-group">
-			Id: <input type="text" th:field="*{id}" readonly="readonly" />
+			<input type="hidden" th:field="*{id}" />
 		</div>
+		
 		<div class="form-group">
-			Username: <input type="text" th:field="*{username}" readonly="readonly"/>
+		<label for="username" class="control-label col-xs-2">Username:</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="username"
+					th:field="*{username}" readonly="readonly"
+					style="width: 30em;" />
+			</div>
+			<div class="col-xs-8"></div>
 		</div>
+		
 		<div class="form-group">
-			First name: <input type="text" th:field="*{firstName}" />
+		<label for="firstName" class="control-label col-xs-2">First name:</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="firstName"
+					th:field="*{firstName}" placeholder="Enter the user's first name"
+					style="width: 30em;" />
+			</div>
+			<div class="col-xs-8"></div>
 		</div>
 
 		<div class="form-group">
-			Last name: <input type="text" th:field="*{lastName}" />
+		<label for="lastName" class="control-label col-xs-2">Last name:</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="lastName"
+					th:field="*{lastName}" placeholder="Enter the user's last name"
+					style="width: 30em;" />
+			</div>
+			<div class="col-xs-8"></div>
 		</div>
+		
 		<div class="form-group">
-			E-mail: <input type="text" th:field="*{email}" readonly="readonly"/>
+		<label for="email" class="control-label col-xs-2">E-mail:</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="email"
+					th:field="*{email}" readonly="readonly"
+					style="width: 30em;" />
+			</div>
+			<div class="col-xs-8"></div>
 		</div>
+		
 		<div class="form-group">
-			Telephone number: <input type="text" th:field="*{telephoneNumber}" />
+			<label for="telephoneNumber" class="control-label col-xs-2">Telephone number:</label>
+			<div class="col-xs-2">
+				<input type="text" class="form-control" id="telephoneNumber"
+					th:field="*{telephoneNumber}" placeholder="Enter the user's phone number"
+					style="width: 30em;" />
+			</div>
+			<div class="col-xs-8"></div>
 		</div>
+		
 		<div class="form-group">
-		Walker:
-			True <input type="radio" th:field="*{walker}" th:value="true" />
-			False <input type="radio" th:field="*{walker}" th:value="false" />
+			<label for="walker" class="control-label col-xs-2">Walker:</label>
+			<div class="col-xs-2">
+			<input type="radio" class="form-control" th:field="*{walker}" th:value="true" style="width: 30em;" />
+			</div>
+			<div class="col-xs-8"></div>
+		</div>
+		
+		<div class="form-group">
+			<label for="walker" class="control-label col-xs-2">Owner:</label>
+			<div class="col-xs-2">
+			<input type="radio" class="form-control" th:field="*{walker}" th:value="false" style="width: 30em;" />
+			</div>
+			<div class="col-xs-8"></div>
 		</div>
 
-		<p>
-			<input type="submit" value="Save" /> 
-			<input type="reset" value="Reset" />
-		</p>
+		<div class="form-group">
+			<div class="col-xs-offset-2 col-xs-10">
+				<button type="submit" class="btn btn-primary">Save user info</button>
+			</div>
+		</div>
 	</form>
-	</div>
-	</div>
 	
 	<div th:replace="footer :: copy"></div>
 </body>
