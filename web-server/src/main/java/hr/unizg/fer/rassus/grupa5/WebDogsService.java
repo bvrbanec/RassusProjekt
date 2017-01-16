@@ -35,15 +35,13 @@ public class WebDogsService {
 		}
 		else{
 			listDogRegistrations.addAll(Arrays.asList(regs));
-			//listDogRegistrations.add(regs);
 		}
 		return listDogRegistrations;
 	}
 	
 	
-	public String register(Dog registration) {
-		restTemplate.postForObject(dogsServiceUrl + "/create", registration, Dog.class);
-		return "dogs-all";
+	public Dog register(Dog registration) {
+		return restTemplate.postForObject(dogsServiceUrl + "/create", registration, Dog.class);
 	}
 	
 	/*String findNameById(Long id){

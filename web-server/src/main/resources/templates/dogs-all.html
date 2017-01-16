@@ -45,8 +45,11 @@
 					<td th:text="${dog.weight}"></td>
 					<td th:text="${dog.height}"></td>
 					<td th:text="${dog.hairLength}"></td>
-					<td><button class="btn btn-primary"
-						th:onclick="'javascript:Clicked(\'' + ${dog.id} + '\');'">Details</button></td> 
+					<td><td>
+						<form th:action="@{('/dogs/' + ${dog.id})}">
+							<input type="submit" class="btn btn-primary" value="Details" />
+						</form>
+					</td></td> 
 				</tr> 
 			</tbody>
 		</table>

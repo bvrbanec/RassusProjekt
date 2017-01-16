@@ -17,13 +17,13 @@ import org.springframework.context.annotation.Bean;
 @EnableDiscoveryClient
 
 public class RegistrationsApplication {
-	
+	/*
 	@Bean
 	CommandLineRunner commandLineRunner(RegistrationRepository rr){
 		return strings->{
 			Stream.of("Pero","Krafna").forEach(n->rr.save(new Registration(n)));
 		};
-	}
+	}*/
 	public static void main(String[] args) {
 		SpringApplication.run(RegistrationsApplication.class, args);
 	}

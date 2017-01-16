@@ -49,7 +49,8 @@ public class WebDogsController {
 		Registration reg = (Registration) session.getAttribute("loggedInUser");
 		Long ownerId = reg.getPersonId();
 		registration.setOwnerId(ownerId);
-		return dogsService.register(registration);
+		Dog newDog = dogsService.register(registration);
+		return "redirect:/dogs/all";
 	}
 	
 	/*@RequestMapping("/nameById/{id}")
@@ -75,7 +76,7 @@ public class WebDogsController {
 			model.addAttribute("dogEvaluation", new Evaluation());
 		}
 		List<Evaluation> evals = evalService.findByDogId(Id);
-		for(Evaluation e : evals) {
+		if( evals != null ) for(Evaluation e : evals) {
 			User walker = usersService.findById(e.getWalkerId());
 			e.setWalkerName(walker.getUsername());
 		}
