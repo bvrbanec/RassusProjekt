@@ -4,8 +4,8 @@
 
 <head th:replace="header :: copy"></head>
 <body>
-<h1>Walkers</h1>
-<div th:if="walkers">
+	<h1>Walkers</h1>
+	<div th:if="walkers">
 		<table class="table table-striped">
 			<thead>
 				<tr>
@@ -15,8 +15,8 @@
 					<th>E-mail</th>
 					<th>Telephone number</th>
 					<th>Walker</th>
-					<th>Link</th>
-					
+					<th></th>
+
 				</tr>
 			</thead>
 			<tbody>
@@ -27,8 +27,10 @@
 					<td th:text="${user.email}"></td>
 					<td th:text="${user.telephoneNumber}"></td>
 					<td th:text="${user.walker}"></td>
-					<td><a th:href="@{('/users/walkers/' + ${user.id})}">Link</a></td>
-					
+					<td><form th:action="@{('/users/walkers/' + ${user.id})}">
+							<input type="submit" class="btn btn-primary" value="View" />
+						</form></td>
+
 				</tr>
 			</tbody>
 		</table>
