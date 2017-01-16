@@ -32,6 +32,10 @@ public class WebDogsController {
 	public String getall(Model model) {
 		List<Dog> registrations = new ArrayList<Dog>();
 		registrations = dogsService.getall();
+		for (Dog dog : registrations) {
+			User owner = usersService.findById(dog.getOwnerId());
+			dog.setOwnerName(owner.getUsername());
+		}
 		model.addAttribute("dog", registrations);
 		return "dogs-all";
 	}

@@ -36,7 +36,7 @@
 				<tr th:each="dog : ${dog}">
 					<td th:text="|${dog.name}|"></td>
 					<td th:text="${dog.breed}"></td>
-					<td th:text="${session.loggedInUser.username}"></td>
+					<td th:text="${dog.ownerName}"></td>
 					<td th:text="${dog.age}"></td>
 					<td th:text="${dog.gender}"></td>
 					<td th:text="${dog.health}"></td>

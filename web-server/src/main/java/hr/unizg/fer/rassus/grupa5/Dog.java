@@ -10,6 +10,7 @@ public class Dog {
 	private Long id;
 	private String name;
 	private Long ownerId;
+	private String ownerName;
 	private String breed;
 	private Double age;
 	private String gender;
@@ -141,5 +142,17 @@ public class Dog {
 	}
 	public void setHairLength(String hairLength) {
 		this.hairLength = hairLength;
+	}
+
+
+
+	public String getOwnerName() {
+		return ownerName;
+	}
+
+
+
+	public void setOwnerName(String ownerName) {
+		this.ownerName = ownerName;
 	}
 }
