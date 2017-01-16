@@ -19,9 +19,11 @@ public class WebUsersController {
 
 	@Autowired
 	protected WebUsersServiceImpl usersService;
+	protected WebEvaluationsService evalService;
 	
-	public WebUsersController(WebUsersServiceImpl usersService) {
+	public WebUsersController(WebUsersServiceImpl usersService, WebEvaluationsService evalService) {
 		this.usersService = usersService;
+		this.evalService = evalService;
 	}	
 	
 	@RequestMapping(path = {"/", "/home"}, method = RequestMethod.GET)
@@ -86,6 +88,7 @@ public class WebUsersController {
 	public String walkers(HttpSession session, Model model, @PathVariable long id){
 		User user = usersService.findById(id);
 		model.addAttribute("formUser", user);
+		
 		return "walker";
 	}
 	

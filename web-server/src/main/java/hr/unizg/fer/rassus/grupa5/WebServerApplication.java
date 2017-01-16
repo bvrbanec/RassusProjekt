@@ -105,7 +105,7 @@ public class WebServerApplication {
 	
 	@Bean
 	public WebUsersController usersController() {
-		return new WebUsersController(usersService());
+		return new WebUsersController(usersService(), evService());
 	}
 	@Bean
 	public WebEvaluationsController evsController() {

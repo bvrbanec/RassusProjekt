@@ -78,5 +78,22 @@ public class WebEvaluationsController {
 		String referer = request.getHeader("Referer");
 		return "redirect:" + referer;
 	}
+	
+	@RequestMapping(value = "/saveUser", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public String postWalkerReview(@RequestParam("walkerId") Long walkerId, Evaluation evaluation, HttpSession session,
+			HttpServletRequest request) {
+		Registration reg = (Registration) session.getAttribute("loggedInUser");
+		Long ownerId = reg.getPersonId();
+
+		Evaluation oldEval = evalsService.checkExisting(walkerId, evaluation.getDogId());
+		oldEval.setWalkerComment(evaluation.getWalkerComment());
+		oldEval.setWalkerRating(evaluation.getWalkerRating());
+		oldEval.setOwnerId(ownerId);
+
+		evalsService.save(oldEval);
+
+		String referer = request.getHeader("Referer");
+		return "redirect:" + referer;
+	}
 
 }

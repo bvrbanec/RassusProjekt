@@ -27,10 +27,11 @@
 					<td th:text="${user.email}"></td>
 					<td th:text="${user.telephoneNumber}"></td>
 					<td th:text="${user.walker}"></td>
-					<td><form th:action="@{('/users/walkers/' + ${user.id})}">
+					<td>
+						<form th:action="@{('/users/walkers/' + ${user.id})}">
 							<input type="submit" class="btn btn-primary" value="View" />
-						</form></td>
-
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		</table>

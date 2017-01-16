@@ -38,7 +38,6 @@ public class WebRegistrationsService {
 		}
 		else{
 			listRegistrations.addAll(Arrays.asList(regs));
-			//listRegistrations.add(regs);
 		}
 		return listRegistrations;
 	}
