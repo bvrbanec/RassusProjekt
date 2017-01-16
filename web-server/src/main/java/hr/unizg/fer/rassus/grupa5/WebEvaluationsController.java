@@ -3,6 +3,9 @@ package hr.unizg.fer.rassus.grupa5;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -11,8 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/evaluations/*")
@@ -44,22 +45,17 @@ public class WebEvaluationsController {
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public String getall(Model model) {
 		List<Evaluation> evals = new ArrayList<Evaluation>();
-		System.out.println("tutu sam");
 		evals = evalsService.findAll();
-		System.out.println("tutu sam2");
 		model.addAttribute("evaluations", evals);
 		return "evaluations-all";
 	}
 
-	// ja sam šetač pasa
-	@RequestMapping(value = "/rate-dog/{dogId}", method = RequestMethod.GET)
+	//@RequestMapping(value = "/rate-dog/{dogId}", method = RequestMethod.GET)
 	public String rateDog(Model model, HttpSession session, @PathVariable("dogId") Long dogId) {
 		Registration reg = (Registration) session.getAttribute("loggedInUser");
-		System.out.println("logirani korisnik:");
-		System.out.println(reg.getPersonId());
 		Evaluation eval = evalsService.checkExisting(reg.getPersonId(), dogId);
 		if (eval == null) {
-			return "redirect:/evaluations/all";
+			return "redirect:/dogs/" + dogId;
 		}
 
 		model.addAttribute("dogEvaluation", eval);
@@ -68,18 +64,18 @@ public class WebEvaluationsController {
 	}
 
 	@RequestMapping(value = "/addEvOfDog", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String postDogReview(@RequestParam("dogId") Long dogId, Evaluation dogEvaluation, HttpSession session) {
+	public String postDogReview(@RequestParam("dogId") Long dogId, Evaluation evaluation, HttpSession session, HttpServletRequest request) {
 		Registration reg = (Registration) session.getAttribute("loggedInUser");
 		Long walkerId = reg.getPersonId();
 
-		System.out.println("dog id u post dog rev je " + dogId);
-		Evaluation oldEval = evalsService.checkExisting(walkerId, dogEvaluation.getDogId());
-		oldEval.setDogComment(dogEvaluation.getDogComment());
-		oldEval.setDogRating(dogEvaluation.getDogRating());
+		Evaluation oldEval = evalsService.checkExisting(walkerId, evaluation.getDogId());
+		oldEval.setDogComment(evaluation.getDogComment());
+		oldEval.setDogRating(evaluation.getDogRating());
 		
 		evalsService.save(oldEval);
 
-		return "redirect:/evaluations/all";
+		String referer = request.getHeader("Referer");
+	    return "redirect:"+ referer;
 	}
 
 }

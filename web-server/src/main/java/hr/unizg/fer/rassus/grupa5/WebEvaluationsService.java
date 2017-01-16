@@ -60,7 +60,6 @@ public class WebEvaluationsService {
 		Evaluation evaluation = new Evaluation();
 		evaluation.setDogId(dogId);
 		evaluation.setWalkerId(walkerId);
-		System.out.println("Evaluiram " + walkerId + " " + dogId);
 		Evaluation ev = restTemplate.postForObject(evalsServiceUrl + "/check", evaluation, Evaluation.class);
 		return ev;
 	}

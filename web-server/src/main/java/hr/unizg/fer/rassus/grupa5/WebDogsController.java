@@ -19,9 +19,11 @@ public class WebDogsController {
 	
 	@Autowired
 	protected WebDogsService dogsService;
+	protected WebEvaluationsService evalService;
 	
-	public WebDogsController(WebDogsService dogsService) {
+	public WebDogsController(WebDogsService dogsService, WebEvaluationsService evalService) {
 		this.dogsService = dogsService;
+		this.evalService = evalService;
 	}
 	
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -59,10 +61,20 @@ public class WebDogsController {
 	}*/
 
 	@RequestMapping("{id}")
-	public String byDogId(Model model, @PathVariable("id") Long Id){
+	public String byDogId(Model model, @PathVariable("id") Long Id, HttpSession session){
 		Dog dog = new Dog();
 		dog = dogsService.findById(Id);
-		model.addAttribute("dogId", dog);
+		model.addAttribute("dog", dog);
+		Registration reg = (Registration) session.getAttribute("loggedInUser");
+		Long walkerId = reg.getPersonId();
+		Evaluation eval = evalService.checkExisting(walkerId, Id);
+		if (eval != null){ 
+			model.addAttribute("canRate", true);
+			model.addAttribute("dogEvaluation", new Evaluation());
+		}
+		List<Evaluation> evals = evalService.findByDogId(Id);
+		model.addAttribute("evaluations", evals);
+		
 		return "dog-profile";
 		
 	}

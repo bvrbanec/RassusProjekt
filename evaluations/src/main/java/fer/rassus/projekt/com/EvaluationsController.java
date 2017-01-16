@@ -37,7 +37,6 @@ public class EvaluationsController {
 
 	@RequestMapping(value = "/check", method = RequestMethod.POST)
 	public Evaluation byWalkerAndDog(@RequestBody Evaluation evaluation) {
-		System.out.println(evaluation.getWalkerId());
 		return rp.findByWalkerIdAndDogId(evaluation.getWalkerId(), evaluation.getDogId());
 	}
 

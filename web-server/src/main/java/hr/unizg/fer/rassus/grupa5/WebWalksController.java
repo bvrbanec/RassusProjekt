@@ -24,7 +24,8 @@ public class WebWalksController {
 	protected WebUsersService usersService;
 	protected WebEvaluationsService evalService;
 
-	public WebWalksController(WebWalksService walksService, WebDogsService dogsService, WebUsersService usersService, WebEvaluationsService evalService) {
+	public WebWalksController(WebWalksService walksService, WebDogsService dogsService, WebUsersService usersService,
+			WebEvaluationsService evalService) {
 		this.walksService = walksService;
 		this.dogsService = dogsService;
 		this.usersService = usersService;
@@ -71,13 +72,14 @@ public class WebWalksController {
 		List<Walk> walks = new ArrayList<Walk>();
 		walks = walksService.findByOwnerId(ownerId);
 		for (Walk walk : walks) {
-			walk.setDogName("Bonzi");
+			Dog dog = dogsService.findById(walk.getDogId());
+			walk.setDogName(dog.getName());
 			if (walk.getWalkerId() != null) {
 				User user = usersService.findById(walk.getWalkerId());
 				String name = user.getFirstName() + " " + user.getLastName();
 				walk.setWalkerName(name);
 			}
-				
+
 		}
 		model.addAttribute("ownerWalks", walks);
 		User user = usersService.findById(ownerId);
@@ -91,13 +93,13 @@ public class WebWalksController {
 		List<Walk> walks = new ArrayList<Walk>();
 		walks = walksService.findByWalkerIdIsNull();
 		for (Walk walk : walks) {
-			// walk.setDogName(dogsService.findDogNameById(walk.getDogId()));
-			walk.setDogName("Bonzi");
-			
+			Dog dog = dogsService.findById(walk.getDogId());
+			walk.setDogName(dog.getName());
+
 			User user = usersService.findById(walk.getOwnerId());
 			String name = user.getFirstName() + " " + user.getLastName();
 			walk.setOwnerName(name);
-			
+
 		}
 		model.addAttribute("activeWalks", walks);
 		return "active-walks";
@@ -126,21 +128,21 @@ public class WebWalksController {
 	@RequestMapping(value = "/accept", method = RequestMethod.POST)
 	public String acceptOffer(@RequestParam("id") Long id, Model model, HttpSession session) {
 		Walk walk = walksService.findById(id);
-		// Long walkerId = (long) 1; // get currently logged in user
 		Registration reg = (Registration) session.getAttribute("loggedInUser");
 		Long walkerId = reg.getPersonId();
 		if (walk != null && walk.getWalkerId() == null) {
 			walk.setWalkerId(walkerId);
 			walk = walksService.acceptOffer(walk);
-			// Person owner = peopleService.getById(walk.ownerId);
-			// model.addAttribute(owner);
+
 			Evaluation eval = new Evaluation();
 			eval.setDogId(walk.getDogId());
 			eval.setOwnerId(walk.getOwnerId());
 			eval.setWalkerId(walkerId);
-			evalService.save(eval);
+			if (evalService.checkExisting(walkerId, walk.getDogId()) == null) {
+				evalService.save(eval);
+			}
 			User user = usersService.findById(walk.getOwnerId());
-			
+
 			model.addAttribute("owner", user);
 			return "owner-connect";
 		} else
