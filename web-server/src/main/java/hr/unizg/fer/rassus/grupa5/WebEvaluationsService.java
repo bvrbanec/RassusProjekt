@@ -9,8 +9,6 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import scala.annotation.meta.setter;
-
 @Service
 public class WebEvaluationsService {
 	@Autowired
@@ -63,16 +61,17 @@ public class WebEvaluationsService {
 		Evaluation ev = restTemplate.postForObject(evalsServiceUrl + "/check", evaluation, Evaluation.class);
 		return ev;
 	}
-	
+
 	List<Evaluation> findByDogId(Long dogId) {
 		Evaluation[] ev = null;
 		ev = restTemplate.getForObject(evalsServiceUrl + "/dog/{dogId}", Evaluation[].class, dogId);
 		if (ev == null || ev.length == 0)
 			return null;
-		else
+		else {
 			return Arrays.asList(ev);
+		}
 	}
-	
+
 	public Evaluation save(Evaluation evaluation) {
 		return restTemplate.postForObject(evalsServiceUrl + "/save", evaluation, Evaluation.class);
 	}

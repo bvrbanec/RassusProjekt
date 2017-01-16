@@ -90,7 +90,7 @@ public class WebServerApplication {
 	
 	@Bean
 	public WebDogsController dogsController() {
-		return new WebDogsController(dogsService(), evService());
+		return new WebDogsController(dogsService(), evService(), usersService());
 	}
 	
 	@Bean

@@ -50,7 +50,7 @@ public class WebEvaluationsController {
 		return "evaluations-all";
 	}
 
-	//@RequestMapping(value = "/rate-dog/{dogId}", method = RequestMethod.GET)
+	// @RequestMapping(value = "/rate-dog/{dogId}", method = RequestMethod.GET)
 	public String rateDog(Model model, HttpSession session, @PathVariable("dogId") Long dogId) {
 		Registration reg = (Registration) session.getAttribute("loggedInUser");
 		Evaluation eval = evalsService.checkExisting(reg.getPersonId(), dogId);
@@ -63,19 +63,20 @@ public class WebEvaluationsController {
 		return "add-evaluation";
 	}
 
-	@RequestMapping(value = "/addEvOfDog", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-	public String postDogReview(@RequestParam("dogId") Long dogId, Evaluation evaluation, HttpSession session, HttpServletRequest request) {
+	@RequestMapping(value = "/save", method = RequestMethod.POST, consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+	public String postDogReview(@RequestParam("dogId") Long dogId, Evaluation evaluation, HttpSession session,
+			HttpServletRequest request) {
 		Registration reg = (Registration) session.getAttribute("loggedInUser");
 		Long walkerId = reg.getPersonId();
 
 		Evaluation oldEval = evalsService.checkExisting(walkerId, evaluation.getDogId());
 		oldEval.setDogComment(evaluation.getDogComment());
 		oldEval.setDogRating(evaluation.getDogRating());
-		
+
 		evalsService.save(oldEval);
 
 		String referer = request.getHeader("Referer");
-	    return "redirect:"+ referer;
+		return "redirect:" + referer;
 	}
 
 }

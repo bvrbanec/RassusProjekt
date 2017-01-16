@@ -9,6 +9,8 @@
 	
 	<p>Email: <span th:text="${owner.email}"></span></p>
 	
+	<a th:href="@{|mailto:${owner.email}?Subject=Walk|}" rel="stylesheet">Send Mail</a>
+	
 	<p  th:if="${owner.telephoneNumber}">Phone: <span th:text="${owner.telephoneNumber}"></span></p>
 
 	<div th:substituteby="footer :: copy"></div>

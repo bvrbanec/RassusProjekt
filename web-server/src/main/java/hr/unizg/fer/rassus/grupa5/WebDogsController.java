@@ -20,10 +20,12 @@ public class WebDogsController {
 	@Autowired
 	protected WebDogsService dogsService;
 	protected WebEvaluationsService evalService;
+	protected WebUsersService usersService;
 	
-	public WebDogsController(WebDogsService dogsService, WebEvaluationsService evalService) {
+	public WebDogsController(WebDogsService dogsService, WebEvaluationsService evalService, WebUsersService usersService) {
 		this.dogsService = dogsService;
 		this.evalService = evalService;
+		this.usersService = usersService;
 	}
 	
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
@@ -73,6 +75,10 @@ public class WebDogsController {
 			model.addAttribute("dogEvaluation", new Evaluation());
 		}
 		List<Evaluation> evals = evalService.findByDogId(Id);
+		for(Evaluation e : evals) {
+			User walker = usersService.findById(e.getWalkerId());
+			e.setWalkerName(walker.getUsername());
+		}
 		model.addAttribute("evaluations", evals);
 		
 		return "dog-profile";

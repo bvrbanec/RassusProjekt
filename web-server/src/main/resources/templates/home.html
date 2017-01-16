@@ -5,17 +5,15 @@
 <head th:replace="header :: copy"></head>
 
 <body>
-	<h1>Home Page</h1>
-	
+	<h1>Dog Walks</h1>
 	<div th:switch="${session.loggedInUser}"> 
   		<p th:case="null">Please log in to use this application</p>
-  		<h5>
+  		<h3>
   			<span th:case="*">
-  				<span>Bok</span>
-  				<span th:text="${session.loggedInUser.username}"></span>
-  				<span> !!!! Dobrodošli na dogWalkersApp</span>
+  				<span>Hi, </span><span th:text="${session.loggedInUser.username}"></span>
+  				<span>, wellcome to dogWalkersApp</span>
   			</span> 
-  		</h5>
+  		</h3>
 	</div>
 	
 	<div th:replace="footer :: copy"></div>
